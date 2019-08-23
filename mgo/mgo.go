@@ -32,14 +32,19 @@ func Init() {
 	database = session.DB(config.Database)
 }
 
-// GetMgo return config session
-func GetMgo() *mgo.Session {
+// GetSession return config session
+func GetSession() *mgo.Session {
 	return session
 }
 
 // GetDataBase return config database
 func GetDataBase() *mgo.Database {
 	return database
+}
+
+// GetCollection return collection
+func GetCollection(name string) *mgo.Collection {
+	return database.C(name)
 }
 
 // GetErrNotFound ...
