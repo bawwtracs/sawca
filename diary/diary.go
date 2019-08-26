@@ -1,4 +1,4 @@
-package daily
+package diary
 
 import (
 	"net/http"
@@ -10,8 +10,8 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-// Daily is just daily
-type Daily struct {
+// Diary is just diary
+type Diary struct {
 	ID      bson.ObjectId `bson:"_id" json:"id" form:"id"`
 	Date    string        `bson:"date" json:"date" form:"date"`
 	KeyWord string        `bson:"keyWord" json:"kerword" form:"kerword"`
@@ -23,49 +23,49 @@ type Daily struct {
 // the uri should be a generic interface
 func Regist(r *gin.Engine, collection *mgo.Collection) {
 
-	// create a daily
-	r.POST("/daily", func(c *gin.Context) {
-		daily := &Daily{}
-		if c.ShouldBind(daily) != nil {
+	// create a diary
+	r.POST("/diary", func(c *gin.Context) {
+		diary := &Diary{}
+		if c.ShouldBind(diary) != nil {
 			c.JSON(http.StatusBadRequest, http.StatusText(http.StatusBadRequest))
 		} else {
-			daily.ID = bson.NewObjectId()
-			if err := collection.Insert(daily); err != nil {
+			diary.ID = bson.NewObjectId()
+			if err := collection.Insert(diary); err != nil {
 				c.JSON(http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError))
 			} else {
-				c.JSON(http.StatusOK, daily)
+				c.JSON(http.StatusOK, diary)
 			}
 		}
 	})
 
 	// update by id
-	r.PUT("/daily/:id", func(c *gin.Context) {
-		daily := &Daily{}
-		if c.ShouldBind(daily) != nil {
+	r.PUT("/diary/:id", func(c *gin.Context) {
+		diary := &Diary{}
+		if c.ShouldBind(diary) != nil {
 			c.JSON(http.StatusBadRequest, http.StatusText(http.StatusBadRequest))
 		} else {
-			if err := collection.UpdateId(c.Param("id"), daily); err != nil {
+			if err := collection.UpdateId(bson.ObjectIdHex(c.Param("id")), diary); err != nil {
 				c.JSON(http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError))
 			}
 		}
 	})
 
 	// retrieve by id
-	r.GET("/daily/id/:id", func(c *gin.Context) {
-		daily := &Daily{}
-		if err := collection.FindId(bson.M{"_id": c.Param("id")}).One(daily); err != nil {
+	r.GET("/diary/id/:id", func(c *gin.Context) {
+		diary := &Diary{}
+		if err := collection.FindId(bson.ObjectIdHex(c.Param("id"))).One(diary); err != nil {
 			c.JSON(http.StatusNotFound, http.StatusText(http.StatusNotFound))
 		} else {
-			c.JSON(http.StatusOK, daily)
+			c.JSON(http.StatusOK, diary)
 		}
 	})
 
 	// retrieve list
-	r.GET("/daily/list", func(c *gin.Context) {
+	r.GET("/diary/list", func(c *gin.Context) {
 		limit, _ := strconv.Atoi(c.Query("limit"))
 		offset, _ := strconv.Atoi(c.Query("offset"))
 		total := 233
-		result := &[]Daily{}
+		result := &[]Diary{}
 		sort := strings.Split(c.Query("sort"), ",")
 		if err := collection.Find(bson.M{}).Sort(sort...).Skip(offset).Limit(limit).All(result); err != nil {
 			c.JSON(http.StatusBadRequest, http.StatusText(http.StatusBadRequest))
@@ -82,8 +82,8 @@ func Regist(r *gin.Engine, collection *mgo.Collection) {
 	})
 
 	// delete by id
-	r.DELETE("/dail/:id", func(c *gin.Context) {
-		if err := collection.RemoveId(c.Param("id")); err != nil {
+	r.DELETE("/diary/:id", func(c *gin.Context) {
+		if err := collection.RemoveId(bson.ObjectIdHex(c.Param("id"))); err != nil {
 			c.JSON(http.StatusNotFound, http.StatusText(http.StatusNotFound))
 		} else {
 			c.JSON(http.StatusOK, http.StatusText(http.StatusOK))

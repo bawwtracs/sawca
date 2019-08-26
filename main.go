@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"sawca/daily"
+	"sawca/diary"
 	"sawca/mgo"
 	"sawca/route"
 )
@@ -15,7 +15,7 @@ func main() {
 
 	r := route.Setup()
 
-	daily.Regist(r, mgo.GetCollection("daily"))
+	diary.Regist(r, mgo.GetCollection("diary"))
 
 	r.Run(":80")
 }
