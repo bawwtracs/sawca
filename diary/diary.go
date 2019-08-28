@@ -17,6 +17,8 @@ type Diary struct {
 	KeyWord string        `bson:"keyWord" json:"kerword" form:"kerword"`
 	Title   string        `bson:"title" json:"title" form:"title" binding:"required"`
 	Content string        `bson:"content" json:"content" form:"content" binding:"required"`
+	Show    string        `bson:"show" json:"show" form:"show"`
+	Iofuu   string        `bson:"iofuu" json:"iofuu" form:"iofuu"`
 }
 
 // Regist regist the model api
@@ -51,7 +53,7 @@ func Regist(r *gin.Engine, collection *mgo.Collection) {
 	})
 
 	// retrieve by id
-	r.GET("/diary/id/:id", func(c *gin.Context) {
+	r.GET("/diary/:id", func(c *gin.Context) {
 		diary := &Diary{}
 		if err := collection.FindId(bson.ObjectIdHex(c.Param("id"))).One(diary); err != nil {
 			c.JSON(http.StatusNotFound, http.StatusText(http.StatusNotFound))
@@ -61,10 +63,10 @@ func Regist(r *gin.Engine, collection *mgo.Collection) {
 	})
 
 	// retrieve list
-	r.GET("/diary/list", func(c *gin.Context) {
+	r.GET("/diaries", func(c *gin.Context) {
 		limit, _ := strconv.Atoi(c.Query("limit"))
 		offset, _ := strconv.Atoi(c.Query("offset"))
-		total := 233
+		total, _ := collection.Count()
 		result := &[]Diary{}
 		sort := strings.Split(c.Query("sort"), ",")
 		if err := collection.Find(bson.M{}).Sort(sort...).Skip(offset).Limit(limit).All(result); err != nil {
