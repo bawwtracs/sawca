@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    If you want to keep a secret, you must also hide it from yourself.
     <div id="nav">
       <router-link to="/list">List</router-link>|
       <router-link to="/detail/safewa">Detail</router-link>
