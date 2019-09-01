@@ -1,26 +1,13 @@
 <template>
   <div class="list">
-    <br />
-    <div class="item" v-for="item in list.data" :key="item.id">
-      <div class="title">
-        <b>title</b>
-        {{item.title}}
-      </div>
-      <div class="title">
-        <b>keyword</b>
-        {{item.keyword}}
-      </div>
-      <div class="title">
-        <b>content</b>
-        {{item.content}}
-      </div>
-      <div class="date">
-        <b>date</b>
-        {{item.date}}
-      </div>
-      <br />
-      <br />
+    <div class="item" v-for="item in list.data" :key="item.id" @click="detail(item.id)">
+      <div class="date">{{ item.date }}</div>
+      <div class="line">{{ item.id }}</div>
+      <div class="line">{{ item.title }}</div>
+      <div class="line">{{ item.keyword }}</div>
+      <div class="line">{{ item.content }}</div>
     </div>
+    <router-link to="/create" tag="div" class="create"></router-link>
   </div>
 </template>
 
@@ -31,6 +18,36 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  .item {
+    width: 100%;
+    margin: 7px 0;
+    text-align: left;
+    .date {
+      text-align: center;
+      font-size: 17pt;
+      font-weight: bold;
+      background: #e6e6e6;
+    }
+    .line {
+      margin: 7px 0;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: #e6e6e6;
+    }
+  }
+}
+.create {
+  position: fixed;
+  width: 36pt;
+  height: 36pt;
+  background: url("../assets/new.png") no-repeat;
+  background-size: cover;
+  bottom: 16pt;
+  right: 16pt;
 }
 </style>
 
@@ -47,6 +64,11 @@ export default {
       .then(response => {
         this.list = response.data;
       });
+  },
+  methods: {
+    detail(id) {
+      this.$router.push({ path: `/detail/${id}` });
+    }
   }
 };
 </script>
