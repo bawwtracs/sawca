@@ -1,9 +1,15 @@
 import requests
 import re
 from bs4 import BeautifulSoup
+import json
 
+f = open("../config/setting.json", encoding='utf-8')
+setting = json.load(f)
+username = setting['com']['username']
+password = setting['com']['password']
 host = "http://qk.quickcreate.cn:8888/"
-auth_url = '/mess/logindo.jsp?prename=oa&username=&password='
+auth_url = '/mess/logindo.jsp?prename=oa&username=' + \
+    username+'&password=' + password
 index_url = "/skins/blue/main.jsp"
 duty_url = "/biz/duty/dutyhealth/dutyInfo.jsp"
 
