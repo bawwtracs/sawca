@@ -98,7 +98,7 @@ for i in range(len(mylisty)-1):
         # special_char_list = '`~!@#$%^&*()-_=+[]{}|\\;:‘’，。《》/？ˇ'
         # pytesseract.pytesseract.tesseract_cmd = 'E:/Tesseract-OCR/tesseract.exe'
         # text1 = pytesseract.image_to_string(ROI)  # 读取文字，此为默认英文
-        cv2.imwrite('c:/HJL/sawca/plugin/tmp/' +
+        cv2.imwrite('tmp/' +
                     str(i) + '_' + str(j) + '.jpg', ROI)
         # textImage = Image.fromarray(ROI)
         # text1 = pytesseract.image_to_string(textImage)

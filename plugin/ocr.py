@@ -22,7 +22,7 @@ def recognize_text():
     # textImage = Image.fromarray(open_out)
     # text = pytesseract.image_to_string(textImage)
     # print("Result:%s"%text)
-src = cv2.imread('c:/HJL/sawca/plugin/qrcode.png', 1)
+src = cv2.imread('qrcode.png', 1)
 # src = cv2.imread("target.jpg")
 cv2.imshow("srcImage", src)
 recognize_text()
