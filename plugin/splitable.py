@@ -4,7 +4,7 @@ from PIL import Image
 import pytesseract
 import random
 
-image = cv2.imread('c:/HJL/sawca/plugin/lines.png', 1)
+image = cv2.imread('test.jpg', 1)
 # 灰度图片
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # 二值化
@@ -47,13 +47,13 @@ cv2.waitKey(0)
 # 两张图片进行减法运算，去掉表格框线
 merge2 = cv2.subtract(binary, merge)
 cv2.imshow("reove table", merge2)
-cv2.waitKey(0)
+cv2.waitKey(0)s
 
 # 去垂直线后图片
 ret, binary = cv2.threshold(
     merge2, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
 cv2.imshow("target", binary)
-cv2.imwrite('c:/HJL/sawca/plugin/tmp_line/line' +
+cv2.imwrite('tmp_line/line' +
             str(random.randint(0, 999))+'.jpg', binary)
 cv2.waitKey(0)
 
