@@ -1,0 +1,13 @@
+.title {
+  background: #e9ecef;
+}
+
+.search-result {
+  border: solid #f8f9fa 0.2rem;
+  margin-bottom: 15px;
+}
+
+.source{
+    border-bottom: solid 1px #e9ecef;
+    margin-bottom: 3px;
+}

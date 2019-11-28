@@ -1,0 +1,39 @@
+.list-group-item.loading {
+  color: #818182;
+  background-color: #fdfdfe;
+}
+
+.list-group-item.loading p::after {
+  color: #818182;
+  background-color: #fdfdfe;
+  content: "";
+  position: absolute;
+  height: 2rem;
+  width: 2rem;
+  top: 0.25rem;
+  right: 1.25rem;
+  display: block;
+  animation: reroating 1s infinite;
+  background: url("../images/loading.png");
+  background-size: cover;
+}
+
+.list-group-item.loading .used-time {
+  display: none;
+}
+
+.list-group-item p {
+  margin: 5px 0;
+}
+
+@keyframes reroating {
+  0% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(270eg);
+  }
+  100% {
+    transform: rotate(450deg);
+  }
+}

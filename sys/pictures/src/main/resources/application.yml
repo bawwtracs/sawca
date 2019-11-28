@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  tomcat:
+    max-threads: 200
+    uri-encoding: UTF-8
+logging:
+  file:
+    max-history: 30
+  level:
+    root: warn
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pictures?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: mc2019go
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    show-sql: true

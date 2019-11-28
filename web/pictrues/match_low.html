@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./static/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./static/css/match.css">
+
+    <title>Picture Analysis</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron mt-3">
+            <h1 class="display-4">低精度搜索</h1>
+            <hr class="my-4">
+            <p>Normal Matching</p>
+            <a class="btn btn-primary btn-default" href="./index.html" role="button">首页</a>
+            <a class="btn btn-primary btn-default" href="./preprocess.html" role="button">预处理</a>
+            <a class="btn btn-primary btn-default" href="./match_high.html" role="button">高精度搜索</a>
+        </div>
+        <form>
+            <div class="form-group">
+                <input type="file" id="lowMatchUpload" multiple="multiple">
+            </div>
+        </form>
+        <hr>
+        <div class="d-flex flex-row flex-wrap justify-content-start">
+            <p class="ml-3 mr-3">1.jpg</p>
+            <p class="ml-3 mr-3">2.jpg</p>
+        </div>
+        <br>
+        <div class="d-flex flex-column flex-nowrap justify-content-center">
+            <div
+                class="d-flex flex-column flex-nowrap justify-content-center search-result shadow p-3 mb-5 bg-white rounded">
+                <div class="d-flex flex-row flex-nowrap justify-content-start source">
+                    <div
+                        class="title d-flex flex-column flex-nowrap justify-content-center mr-3 pr-3 pl-3 font-weight-bold flex-shrink-0">
+                        目标图片</div>
+                    <div class="d-flex flex-row flex-wrap justify-content-start">
+                        <figure class="figure mr-3">
+                            <img src="./static/images/statistics.jpg" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">1.jpg</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div
+                        class="title d-flex flex-column flex-nowrap justify-content-center mr-3 pr-3 pl-3 font-weight-bold flex-shrink-0">
+                        命中图片</div>
+                    <div class="d-flex flex-row flex-wrap justify-content-start">
+                        <figure class="figure mr-3">
+                            <img src="./static/images/statistics.jpg" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">99.1%</figcaption>
+                        </figure>
+                        <figure class="figure mr-3">
+                            <img src="./static/images/loading.png" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">12.1%</figcaption>
+                        </figure>
+                        <figure class="figure mr-3">
+                            <img src="./static/images/loading.png" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">2.1%</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="d-flex flex-column flex-nowrap justify-content-center search-result shadow p-3 mb-5 bg-white rounded">
+                <div class="d-flex flex-row flex-nowrap justify-content-start source">
+                    <div
+                        class="title d-flex flex-column flex-nowrap justify-content-center mr-3 pr-3 pl-3 font-weight-bold flex-shrink-0">
+                        目标图片</div>
+                    <div class="d-flex flex-row flex-wrap justify-content-start">
+                        <figure class="figure mr-3">
+                            <img src="./static/images/statistics.jpg" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">2.jpg</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div
+                        class="title d-flex flex-column flex-nowrap justify-content-center mr-3 pr-3 pl-3 font-weight-bold flex-shrink-0">
+                        命中图片</div>
+                    <div class="d-flex flex-row flex-wrap justify-content-start">
+                        <figure class="figure mr-3">
+                            <img src="./static/images/statistics.jpg" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">99.1%</figcaption>
+                        </figure>
+                        <figure class="figure mr-3">
+                            <img src="./static/images/loading.png" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">12.1%</figcaption>
+                        </figure>
+                        <figure class="figure mr-3">
+                            <img src="./static/images/loading.png" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-center">2.1%</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./static/jquery/jquery-3.4.1.slim.min.js"></script>
+    <!-- <script src="./static/popper/popper.min.js"></script> -->
+    <script src="./static/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+
+
+    <script src="./static/js/match.js"></script>
+</body>
+
+</html>

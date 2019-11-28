@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./static/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./static/css/preprocess.css">
+
+    <title>Picture Analysis</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron mt-3">
+            <h1 class="display-4">预处理</h1>
+            <hr class="my-4">
+            <p>This is a simple picture analysis unit, a simple demo for uploading and searching picture.</p>
+            <a class="btn btn-primary btn-default" href="./index.html" role="button">首页</a>
+            <a class="btn btn-primary btn-default" href="./match_low.html" role="button">低精度搜索</a>
+            <a class="btn btn-primary btn-default" href="./match_high.html" role="button">高精度搜索</a>
+        </div>
+        <form>
+            <div class="form-group">
+                <input type="file" id="prepreprocessUpload" multiple="multiple">
+            </div>
+        </form>
+        <hr>
+        <div class="d-flex flex-row flex-wrap justify-content-start">
+            <p class="ml-3 mr-3">1.jpg</p>
+            <p class="ml-3 mr-3">2.jpg</p>
+        </div>
+        <br>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between">
+                <p class="file-name mr-3">Cras justo odio</p>
+                <p class="used-time">160ms</p>
+            </li>
+            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between loading">
+                <p class="file-name mr-3">Morbi leo risus</p>
+                <p class="used-time">233ms</p>
+            </li>
+            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between">
+                <p class="file-name mr-3">Morbi leo risus</p>
+                <p class="used-time">233ms</p>
+            </li>
+            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between loading">
+                <p class="file-name mr-3">Morbi leo risus</p>
+                <p class="used-time">160ms</p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./static/jquery/jquery-3.4.1.slim.min.js"></script>
+    <!-- <script src="./static/popper/popper.min.js"></script> -->
+    <script src="./static/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+
+
+    <script src="./static/js/preprocess.js"></script>
+</body>
+
+</html>
