@@ -6,11 +6,17 @@ import com.demo.pictures.repository.PictureRequestPicRepository;
 import com.demo.pictures.repository.PictureRequestRepository;
 import com.demo.pictures.service.IPictureRequestPicService;
 import com.demo.pictures.service.IPictureRequestService;
+import com.demo.pictures.util.ApiPic;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
+@Log4j2
 @RestController
 @RequestMapping("/picture")
 public class Rest {
@@ -23,6 +29,53 @@ public class Rest {
     private PictureRequestRepository requestRepository;
     @Resource
     private PictureRequestPicRepository requestPicRepository;
+    @Resource
+    private ApiPic apiPic;
+
+    @PostMapping("/add")
+    public PictureRequestPic add(@RequestParam(value = "photo") MultipartFile multipartFile, @RequestParam(value = "fast") boolean fast) {
+        if (!multipartFile.isEmpty()) {
+            try {
+                String fileName = multipartFile.getOriginalFilename();
+                String prefix = fileName.substring(fileName.lastIndexOf("."));
+                File file;
+                file = File.createTempFile(UUID.randomUUID().toString().replaceAll("-", ""), prefix);
+                multipartFile.transferTo(file);
+                PictureRequestPic pictureRequestPic = apiPic.addOrSearch(fileName, file, fast, "add");
+                file.delete();
+                return pictureRequestPic;
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        } else {
+            log.info("uploaded file was empty");
+            return null;
+        }
+        return null;
+    }
+
+    @PostMapping("/search")
+    public PictureRequestPic search(@RequestParam(value = "photo") MultipartFile multipartFile, @RequestParam(value = "fast") boolean fast) {
+        if (!multipartFile.isEmpty()) {
+            try {
+                String fileName = multipartFile.getOriginalFilename();
+                String prefix = fileName.substring(fileName.lastIndexOf("."));
+                File file;
+                file = File.createTempFile(UUID.randomUUID().toString().replaceAll("-", ""), prefix);
+                multipartFile.transferTo(file);
+                PictureRequestPic pictureRequestPic = apiPic.addOrSearch(fileName, file, fast, "search");
+                file.delete();
+                return pictureRequestPic;
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        } else {
+            log.info("uploaded file was empty");
+            return null;
+        }
+        return null;
+    }
+
 
     @PostMapping("/request")
     public PictureRequest createPictureRequest(@RequestBody PictureRequest pictureRequest) {

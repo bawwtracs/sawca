@@ -34,16 +34,16 @@ public class PictureRequest implements Serializable {
     private Long id;
 
     @Column
-    private Long timestamp;
+    private Long requestTime;
+
+    @Column
+    private Long responseTime;
 
     @Column
     private String operation;
 
-    @Column
-    private Integer sendTotal;
-
-    @Column
-    private Integer matchTotal;
+    @Column(length = 1000)
+    private String mark;
 
 
 }

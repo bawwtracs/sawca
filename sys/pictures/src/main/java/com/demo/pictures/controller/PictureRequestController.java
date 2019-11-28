@@ -1,6 +1,5 @@
 package com.demo.pictures.controller;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;

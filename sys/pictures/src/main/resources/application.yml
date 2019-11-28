@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 18080
   tomcat:
     max-threads: 200
     uri-encoding: UTF-8
@@ -9,6 +9,10 @@ logging:
   level:
     root: warn
 spring:
+#  http:
+#    multipart:
+#      maxFileSize: 1000Mb
+#      maxRequestSize: 1000Mb
   mvc:
     static-path-pattern: /static/**
   resources:
@@ -26,3 +30,10 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     show-sql: true
+wozhitu:
+  api:
+    host: http://www.tudatech.com:8086
+    key-fast: guangzhouMrHuangGongAnProj20191126H1_simph2type2
+    key-accurate: guangzhouMrHuangGongAnProj20191126H1_recog
+    search: /vsearchtech/api/v1.0/apisim_search
+    add: /vsearchtech/api/v1.0/apisim_additem

@@ -27,30 +27,14 @@
         </div>
         <form>
             <div class="form-group">
-                <input type="file" onchange="getChooseFiles(this);" id="prepreprocessUpload" multiple="multiple">
+                <input type="file" onchange="getChooseFiles(this);" multiple="multiple">
             </div>
         </form>
         <hr>
         <div class="d-flex flex-row flex-wrap justify-content-start" id="showFileName">
         </div>
         <br>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between">
-                <p class="file-name mr-3">Cras justo odio</p>
-                <p class="used-time">160ms</p>
-            </li>
-            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between loading">
-                <p class="file-name mr-3">Morbi leo risus</p>
-                <p class="used-time">233ms</p>
-            </li>
-            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between">
-                <p class="file-name mr-3">Morbi leo risus</p>
-                <p class="used-time">233ms</p>
-            </li>
-            <li class="list-group-item d-flex flex-row flex-nowrap justify-content-between loading">
-                <p class="file-name mr-3">Morbi leo risus</p>
-                <p class="used-time">160ms</p>
-            </li>
+        <ul class="list-group list-group-flush" id="processList">
         </ul>
     </div>
 
@@ -64,7 +48,7 @@
     <script src="./static/axios/axios.min.js"></script>
 
 
-    <script src="./config/api.js"></script>
+    <script src="./config/config.js"></script>
     <script src="./static/js/preprocess.js"></script>
 </body>
 

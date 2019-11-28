@@ -5,12 +5,11 @@
 
 .list-group-item.loading p::after {
   color: #818182;
-  background-color: #fdfdfe;
   content: "";
   position: absolute;
   height: 2rem;
   width: 2rem;
-  top: 0.25rem;
+  top: 0.5rem;
   right: 1.25rem;
   display: block;
   animation: reroating 1s infinite;
@@ -18,7 +17,47 @@
   background-size: cover;
 }
 
-.list-group-item.loading .used-time {
+.list-group-item.too-big {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+.list-group-item.too-big p::after {
+  color: #721c24;
+  content: "图片尺寸过大!";
+  position: absolute;
+  height: 1rem;
+  width: 8rem;
+  top: 1rem;
+  right: 1.25rem;
+  display: block;
+}
+
+.list-group-item.failed {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+.list-group-item.failed p::after {
+  color: #721c24;
+  content: "请求失败,网络异常或未知原因!";
+  position: absolute;
+  height: 1rem;
+  width: 20rem;
+  top: 1rem;
+  right: 1.25rem;
+  display: block;
+}
+
+.list-group-item.loading .result {
+  display: none;
+}
+
+.list-group-item.too-big .result {
+  display: none;
+}
+
+.list-group-item.failed .result {
   display: none;
 }
 

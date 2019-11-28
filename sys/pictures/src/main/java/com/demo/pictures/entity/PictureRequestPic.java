@@ -40,13 +40,17 @@ public class PictureRequestPic implements Serializable {
     private String name;
 
     @Column
-    private Long timestamp;
+    private Long requestTime;
 
     @Column
-    private Long response;
+    private Long responseTime;
 
     @Column
     private String operation;
 
+    @Column(length = 1000)
+    private String result;
 
+    @Column(length = 1000)
+    private String mark;
 }
