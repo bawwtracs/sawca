@@ -22,18 +22,16 @@
             <hr class="my-4">
             <p>This is a simple picture analysis unit, a simple demo for uploading and searching picture.</p>
             <a class="btn btn-primary btn-default" href="./index.html" role="button">首页</a>
-            <a class="btn btn-primary btn-default" href="./match_low.html" role="button">低精度搜索</a>
-            <a class="btn btn-primary btn-default" href="./match_high.html" role="button">高精度搜索</a>
+            <a class="btn btn-primary btn-default" href="./match_fast.html" role="button">快速搜索</a>
+            <a class="btn btn-primary btn-default" href="./match_accurate.html" role="button">高精度搜索</a>
         </div>
         <form>
             <div class="form-group">
-                <input type="file" id="prepreprocessUpload" multiple="multiple">
+                <input type="file" onchange="getChooseFiles(this);" id="prepreprocessUpload" multiple="multiple">
             </div>
         </form>
         <hr>
-        <div class="d-flex flex-row flex-wrap justify-content-start">
-            <p class="ml-3 mr-3">1.jpg</p>
-            <p class="ml-3 mr-3">2.jpg</p>
+        <div class="d-flex flex-row flex-wrap justify-content-start" id="showFileName">
         </div>
         <br>
         <ul class="list-group list-group-flush">
@@ -63,6 +61,10 @@
     <script src="./static/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 
 
+    <script src="./static/axios/axios.min.js"></script>
+
+
+    <script src="./config/api.js"></script>
     <script src="./static/js/preprocess.js"></script>
 </body>
 
