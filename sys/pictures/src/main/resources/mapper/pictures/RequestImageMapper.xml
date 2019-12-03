@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.pictures.mapper.RequestImageMapper">
+
+    <select id="statisticsRequestImage" resultType="java.util.HashMap">
+        select count(*) total, min(request_time) startTime, max(response_time) endTime, request_id requestId, operation operation from request_image where type = 'fast' group by request_id, operation order by request_id desc
+     </select>
+
+    <select id="countRequestImage" resultType="java.lang.Long">
+        select count(*) from (select count(*) from request_image where operation = 'add' and type = 'fast' group by name) v1
+     </select>
+
+</mapper>

@@ -1,121 +1,150 @@
 package com.demo.pictures.rest;
 
-import com.demo.pictures.entity.PictureRequest;
-import com.demo.pictures.entity.PictureRequestPic;
-import com.demo.pictures.repository.PictureRequestPicRepository;
-import com.demo.pictures.repository.PictureRequestRepository;
-import com.demo.pictures.service.IPictureRequestPicService;
-import com.demo.pictures.service.IPictureRequestService;
-import com.demo.pictures.util.ApiPic;
+import com.demo.pictures.entity.Request;
+import com.demo.pictures.entity.RequestImage;
+import com.demo.pictures.repository.RequestImageRepository;
+import com.demo.pictures.repository.RequestRepository;
+import com.demo.pictures.service.IRequestImageService;
+import com.demo.pictures.service.IRequestService;
+import com.demo.pictures.util.ImgServer;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.File;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 @Log4j2
 @RestController
-@RequestMapping("/picture")
+@RequestMapping("/api")
 public class Rest {
 
-    @Resource
-    private IPictureRequestService requestService;
-    @Resource
-    private IPictureRequestPicService requestPicService;
-    @Resource
-    private PictureRequestRepository requestRepository;
-    @Resource
-    private PictureRequestPicRepository requestPicRepository;
-    @Resource
-    private ApiPic apiPic;
+    private static String addPath = "image/add";
+    private static String searchPath = "image/search";
 
-    @PostMapping("/add")
-    public PictureRequestPic add(@RequestParam(value = "photo") MultipartFile multipartFile, @RequestParam(value = "fast") boolean fast) {
-        if (!multipartFile.isEmpty()) {
-            try {
-                String fileName = multipartFile.getOriginalFilename();
-                String prefix = fileName.substring(fileName.lastIndexOf("."));
-                File file;
-                file = File.createTempFile(UUID.randomUUID().toString().replaceAll("-", ""), prefix);
-                multipartFile.transferTo(file);
-                PictureRequestPic pictureRequestPic = apiPic.addOrSearch(fileName, file, fast, "add");
-                file.delete();
-                return pictureRequestPic;
-            } catch (Exception e) {
-                log.error(e.getMessage());
+    public Rest() {
+        try {
+            Path addPhotoPath = Paths.get(addPath);
+            if (!Files.exists(addPhotoPath)) {
+                Files.createDirectories(addPhotoPath);
             }
-        } else {
-            log.info("uploaded file was empty");
-            return null;
+            Path searchPhotoPath = Paths.get(searchPath);
+            if (!Files.exists(searchPhotoPath)) {
+                Files.createDirectories(searchPhotoPath);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return null;
     }
 
-    @PostMapping("/search")
-    public PictureRequestPic search(@RequestParam(value = "photo") MultipartFile multipartFile, @RequestParam(value = "fast") boolean fast) {
-        if (!multipartFile.isEmpty()) {
-            try {
-                String fileName = multipartFile.getOriginalFilename();
-                String prefix = fileName.substring(fileName.lastIndexOf("."));
-                File file;
-                file = File.createTempFile(UUID.randomUUID().toString().replaceAll("-", ""), prefix);
-                multipartFile.transferTo(file);
-                PictureRequestPic pictureRequestPic = apiPic.addOrSearch(fileName, file, fast, "search");
-                file.delete();
-                return pictureRequestPic;
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
-        } else {
-            log.info("uploaded file was empty");
+    @Resource
+    private IRequestService requestService;
+    @Resource
+    private IRequestImageService requestImageService;
+    @Resource
+    private RequestRepository requestRepository;
+    @Resource
+    private RequestImageRepository requestImageRepository;
+    @Resource
+    private ImgServer imgServer;
+
+    @PostMapping("/imgsvr/{operation}/{type}")
+    public RequestImage add(@RequestParam(value = "photo") MultipartFile image, @PathVariable String type, @PathVariable(value = "operation") String operation, @RequestParam(value = "requestId") Long requestId) {
+        try {
+            String imgName = image.getOriginalFilename();
+            Path imgPath = Paths.get("add".equals(operation) ? addPath : searchPath).resolve(imgName);
+            InputStream inputStream = image.getInputStream();
+            Files.copy(inputStream, imgPath, StandardCopyOption.REPLACE_EXISTING);
+            return imgServer.addOrSearch(imgPath, type, operation, requestId);
+        } catch (Exception e) {
+            log.error(e);
             return null;
         }
-        return null;
     }
 
+    @GetMapping("/image/{folder}/{imgName}")
+    public void getImage(HttpServletResponse response, @PathVariable("folder") String folder, @PathVariable(value = "imgName") String imgName) throws IOException {
+        try {
+            String suffix = imgName.substring(imgName.lastIndexOf(".") + 1);
+            response.setContentType("image/" + suffix + ";charset=utf-8");
+            response.setHeader("Content-Disposition", "inline; filename=" + imgName);
+            ServletOutputStream outputStream = response.getOutputStream();
+            outputStream.write(Files.readAllBytes(Paths.get("add".equals(folder) ? addPath : searchPath).resolve(imgName)));
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception e) {
+            log.error("get Image Error");
+        }
+    }
+
+    @GetMapping("/del/image")
+    public String delImage(@RequestParam("imgName") String imgName, @RequestParam("type") String type) {
+        return imgServer.delImage(imgName, type);
+    }
+
+    @GetMapping("/request/statistics")
+    public List<Map<String, Object>> statisticsRequestImage() {
+        return requestImageService.statisticsRequestImage();
+    }
+
+    @GetMapping("/count/img")
+    public Long getRequestById() {
+        return requestImageService.countRequestImage();
+    }
 
     @PostMapping("/request")
-    public PictureRequest createPictureRequest(@RequestBody PictureRequest pictureRequest) {
-        return requestRepository.save(pictureRequest);
+    public Request createRequest(@RequestBody Request request) {
+        if (request.getRequestTime() == null || request.getRequestTime() == 0) {
+            request.setRequestTime(new Date().getTime());
+        }
+        return requestRepository.save(request);
     }
 
     @GetMapping("/request")
-    public List<PictureRequest> getAllPictureRequests() {
+    public List<Request> getAllRequests() {
         return requestRepository.findAll();
     }
 
     @GetMapping("/request/{id}")
-    public PictureRequest getPictureRequestById(@PathVariable("id") Long id) {
+    public Request getRequestById(@PathVariable("id") Long id) {
         return requestRepository.getOne(id);
     }
 
     @PutMapping("/request/{id}")
-    public PictureRequest updatePictureRequestById(@PathVariable("id") Long id, @RequestBody PictureRequest pictureRequest) {
-        pictureRequest.setId(id);
-        return requestRepository.save(pictureRequest);
+    public Request updateRequestById(@PathVariable("id") Long id, @RequestBody Request
+            request) {
+        request.setId(id);
+        return requestRepository.save(request);
     }
 
-    @PostMapping("/requestPic")
-    public PictureRequestPic createPictureRequestPic(@RequestBody PictureRequestPic pictureRequestPic) {
-        return requestPicRepository.save(pictureRequestPic);
+    @PostMapping("/request/image")
+    public RequestImage createRequestImage(@RequestBody RequestImage requestimage) {
+        return requestImageRepository.save(requestimage);
     }
 
-    @GetMapping("/requestPic")
-    public List<PictureRequestPic> getAllPictureRequestPics() {
-        return requestPicRepository.findAll();
+    @GetMapping("/request/image")
+    public List<RequestImage> getAllRequestImages() {
+        return requestImageRepository.findAll();
     }
 
-    @GetMapping("/requestPic/{id}")
-    public PictureRequestPic getPictureRequestPicById(@PathVariable("id") Long id) {
-        return requestPicRepository.getOne(id);
+    @GetMapping("/request/image/{id}")
+    public RequestImage getRequestImageById(@PathVariable("id") Long id) {
+        return requestImageRepository.getOne(id);
     }
 
-    @PutMapping("/requestPic/{id}")
-    public PictureRequestPic updatePictureRequestPicById(@PathVariable("id") Long id, @RequestBody PictureRequestPic pictureRequestPic) {
-        pictureRequestPic.setId(id);
-        return requestPicRepository.save(pictureRequestPic);
+    @PutMapping("/request/image/{id}")
+    public RequestImage updateRequestImageById(@PathVariable("id") Long id, @RequestBody RequestImage requestimage) {
+        requestimage.setId(id);
+        return requestImageRepository.save(requestimage);
     }
 }

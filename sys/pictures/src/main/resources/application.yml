@@ -1,3 +1,5 @@
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/pictures/**Mapper.xml
 server:
   port: 18080
   tomcat:
@@ -18,10 +20,10 @@ spring:
   resources:
     static-locations: classpath:/static/
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pictures?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=true
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pictures?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
-    password: mc2019go
+    password: '_Jj43^66'
   jpa:
     properties:
       hibernate:
@@ -35,5 +37,9 @@ wozhitu:
     host: http://www.tudatech.com:8086
     key-fast: guangzhouMrHuangGongAnProj20191126H1_simph2type2
     key-accurate: guangzhouMrHuangGongAnProj20191126H1_recog
-    search: /vsearchtech/api/v1.0/apisim_search
-    add: /vsearchtech/api/v1.0/apisim_additem
+    search-fast: /vsearchtech/api/v1.0/apisim_search
+    search-accurate: /vsearchtech/api/v1.0/apipnp_search
+    add-fast: /vsearchtech/api/v1.0/apisim_additem
+    add-accurate: /vsearchtech/api/v1.0/apipnp_additem
+    delete-fast: /vsearchtech/api/v1.0/apisim_deleteitem
+    delete-accurate: /vsearchtech/api/v1.0/apipnp_deleteitem
