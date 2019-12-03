@@ -23,56 +23,48 @@
             <!-- <p class="lead">图像识别 DEMO</p> -->
             <hr class="my-4">
             <p>This is a simple picture analysis unit, a simple demo for uploading and searching picture.</p>
-            <a class="btn btn-primary btn-default" href="./preprocess.html" role="button">预处理</a>
-            <a class="btn btn-primary btn-default" href="./match_fast.html" role="button">快速搜索</a>
-            <a class="btn btn-primary btn-default" href="./match_accurate.html" role="button">高精度搜索</a>
+            <a class="btn btn-primary btn-default" href="./index.html" role="button">首页</a>
+            <a class="btn btn-primary btn-default" href="./add_fast.html" role="button">快速预处理</a>
+            <a class="btn btn-primary btn-default" href="./add_accurate.html" role="button">高精度预处理</a>
+            <a class="btn btn-primary btn-default" href="./search_fast.html" role="button">快速搜索</a>
+            <a class="btn btn-primary btn-default" href="./search_accurate.html" role="button">高精度搜索</a>
         </div>
         <div class="d-flex flex-row justify-content-start">
             <div class="card mr-3 statistics">
-                <img src="./static/images/statistics.jpg" class="card-img-top statistics">
+                <!-- <img src="./static/images/statistics.jpg" class="card-img-top statistics"> -->
                 <div class="card-body">
                     <h5 class="card-title font-size-32">图片总量</h5>
                     <h6 class="card-subtitle mb-2 text-muted">索引吞吐量</h6>
-                    <p class="card-text font-weight-bold font-weight-bold font-size-32">1023510</p>
+                    <p class="card-text font-weight-bold font-weight-bold font-size-32" id="total">1023510</p>
                 </div>
-            </div>
-            <div class="card mr-3">
                 <div class="card-body">
                     <h5 class="card-title font-size-24">上次新增数量</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">2019/11/28 19:06</h6>
-                    <p class="card-text font-weight-bold font-weight-bold font-size-32">50</p>
-                </div>
-                <hr>
-                <div class="card-body">
-                    <h5 class="card-title font-size-24">今天新增数量</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">2019/11/28 星期三</h6>
-                    <p class="card-text font-weight-bold font-weight-bold font-size-32">6636</p>
+                    <!-- <h6 class="card-subtitle mb-2 text-muted">2019/11/28 19:06</h6> -->
+                    <p class="card-text font-weight-bold font-weight-bold font-size-32" id="lastAdd">50</p>
                 </div>
             </div>
             <div class="card mr-3">
                 <div class="card-body">
                     <h5 class="card-title font-size-24">上次预处理时间</h5>
                     <h6 class="card-subtitle mb-2 text-muted">上次平均</h6>
-                    <p class="card-text font-weight-bold font-weight-bold font-size-32">666ms/张</p>
+                    <p class="card-text font-weight-bold font-weight-bold font-size-32" id="lastAddAvg">666ms/张</p>
                 </div>
-                <hr>
                 <div class="card-body">
                     <h5 class="card-title font-size-24">预处理平均时间</h5>
                     <h6 class="card-subtitle mb-2 text-muted">总平均</h6>
-                    <p class="card-text font-weight-bold font-weight-bold font-size-32">300ms/张</p>
+                    <p class="card-text font-weight-bold font-weight-bold font-size-32" id="addAvg">300ms/张</p>
                 </div>
             </div>
             <div class="card mr-3">
                 <div class="card-body">
                     <h5 class="card-title font-size-24">上次查询时间</h5>
                     <h6 class="card-subtitle mb-2 text-muted">上次平均</h6>
-                    <p class="card-text font-weight-bold font-weight-bold font-size-32">666ms/张</p>
+                    <p class="card-text font-weight-bold font-weight-bold font-size-32" id="lastSearchAvg">666ms/张</p>
                 </div>
-                <hr>
                 <div class="card-body">
                     <h5 class="card-title font-size-24">图像查询平均时间</h5>
                     <h6 class="card-subtitle mb-2 text-muted">总平均</h6>
-                    <p class="card-text font-weight-bold font-weight-bold font-size-32">300ms/张</p>
+                    <p class="card-text font-weight-bold font-weight-bold font-size-32" id="searchAvg">300ms/张</p>
                 </div>
             </div>
         </div>
@@ -86,6 +78,9 @@
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
 
+    <script src="./static/axios/axios.min.js"></script>
+
+    <script src="./config/config.js"></script>
     <script src="./static/js/index.js"></script>
 </body>
 

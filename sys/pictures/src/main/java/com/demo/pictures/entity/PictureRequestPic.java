@@ -48,7 +48,7 @@ public class PictureRequestPic implements Serializable {
     @Column
     private String operation;
 
-    @Column(length = 1000)
+    @Column(columnDefinition = "text")
     private String result;
 
     @Column(length = 1000)

@@ -1,8 +1,13 @@
 const config = {
-  host: "http://localhost:18080",
+  host: "http://localhost:18080/api/",
   api: {
-    add: "/picture/add",
-    search: "/picture/search"
+    addFast: "imgsvr/add/fast",
+    searchFast: "imgsvr/search/fast",
+    addAccurate: "imgsvr/add/accurate",
+    searchAccurate: "imgsvr/search/accurate",
+    request: "request",
+    total: "count/img",
+    statistics: "request/statistics"
   }
 };
 

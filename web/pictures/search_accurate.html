@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./static/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="./static/css/match.css">
+    <link rel="stylesheet" href="./static/css/search.css">
 
     <title>Picture Analysis</title>
 </head>
@@ -18,16 +18,18 @@
 
     <div class="container">
         <div class="jumbotron mt-3">
-            <h1 class="display-4">低精度搜索</h1>
+            <h1 class="display-4">高精度搜索</h1>
             <hr class="my-4">
-            <p>Normal Matching</p>
+            <p>Accuracy Searching</p>
             <a class="btn btn-primary btn-default" href="./index.html" role="button">首页</a>
-            <a class="btn btn-primary btn-default" href="./preprocess.html" role="button">预处理</a>
-            <a class="btn btn-primary btn-default" href="./match_accurate.html" role="button">高精度搜索</a>
+            <a class="btn btn-primary btn-default" href="./add_fast.html" role="button">快速预处理</a>
+            <a class="btn btn-primary btn-default" href="./add_accurate.html" role="button">高精度预处理</a>
+            <a class="btn btn-primary btn-default" href="./search_fast.html" role="button">快速搜索</a>
+            <a class="btn btn-primary btn-default" href="./search_accurate.html" role="button">高精度搜索</a>
         </div>
         <form>
             <div class="form-group">
-                <input type="file" onchange="getChooseFiles(this);" multiple="multiple">
+                <input type="file" onchange="getChooseFiles(this);" multiple="multiple" accept=".png,.jpg,.jpeg,image/png,image/jpg,image/jpeg">
             </div>
         </form>
         <hr>
@@ -43,8 +45,10 @@
     <!-- <script src="./static/popper/popper.min.js"></script> -->
     <script src="./static/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 
+    <script src="./static/axios/axios.min.js"></script>
 
-    <script src="./static/js/match.js"></script>
+    <script src="./config/config.js"></script>
+    <script src="./static/js/search.js"></script>
 </body>
 
 </html>
