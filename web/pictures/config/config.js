@@ -5,10 +5,12 @@ const config = {
     searchFast: "imgsvr/search/fast",
     addAccurate: "imgsvr/add/accurate",
     searchAccurate: "imgsvr/search/accurate",
+    resend: "imgsvr/resend",
     request: "request",
     total: "count/img",
     statistics: "request/statistics"
-  }
+  },
+  resendLimit: 2
 };
 
 for (let key in config.api) {

@@ -27,6 +27,7 @@ function rederFileList(files, requestId) {
         .append(`<li class="list-group-item d-flex flex-row flex-nowrap justify-content-between loading" id="add_${i}">
                 <p class="file-name mr-3">${files[i].name}</p>
                 <p class="result" id="result_${i}">xx m/s</p>
+                <button type="button" class="btn btn-primary resend" onclick="resend(this);">Resend</button>
               </li>`);
       var ele = document.getElementById("addList");
       ele.scrollTop = ele.scrollHeight;
@@ -40,20 +41,62 @@ function saveRequest(operation, imageTotal) {
   return axios.post(config.api.request, {
     operation,
     imageTotal,
-    type: (location.href.indexOf("accurate") > -1 ? "accurate": "fast")
+    type: location.href.indexOf("accurate") > -1 ? "accurate" : "fast"
   });
 }
 
-function add(photo, index, requestId) {
+function resend(el) {
+  let _el = $(el);
+  add(
+    _el.data("photo"),
+    _el.data("index"),
+    _el.data("requestId"),
+    _el.data("count"),
+    _el.data("requestImageId")
+  );
+}
+
+function add(photo, index, requestId, count, requestImageId) {
   let accurate = location.href.indexOf("accurate") > -1;
   let formData = new FormData();
   formData.append("photo", photo);
   formData.append("requestId", requestId);
+  let url = accurate ? config.api.addAccurate : config.api.addFast;
+
+  // resend start
+  if (count) {
+    if (count > config.resendLimit) {
+      return;
+    } else {
+      count++;
+    }
+  } else if (count !== false) {
+    count = 1;
+  }
+  $("#add_" + index)
+    .removeClass("loading")
+    .removeClass("failed")
+    .removeClass("too-big")
+    .addClass("loading");
+  if (requestImageId) {
+    url = config.api.resend;
+    formData.append("requestImageId", requestImageId);
+  }
+  // resend end
+
   axios
-    .post(accurate ? config.api.addAccurate : config.api.addFast, formData)
+    .post(url, formData)
     .then(function(response) {
       console.log(response);
       if (response.status == 200) {
+        $("#add_" + index)
+          .find(".resend")
+          .eq(0)
+          .data("index", index)
+          .data("requestId", requestId)
+          .data("count", false)
+          .data("requestImageId", response.data.id)
+          .data("photo", photo);
         let result = JSON.parse(response.data.result);
         if (result.data == "IMAGE_INDEX_CODE_ERROR_IMAGE_SIZE_TOO_BIG") {
           $("#add_" + index)
@@ -69,13 +112,13 @@ function add(photo, index, requestId) {
         $("#add_" + index)
           .removeClass("loading")
           .addClass("failed");
+        if (count) {
+          add(photo, index, requestId, count, response.data.id);
+        }
       }
     })
     .catch(function(error) {
       console.log(error);
-      // $("#add_" + index)
-      //   .removeClass("loading")
-      //   .addClass("too-big");
     });
 }
 

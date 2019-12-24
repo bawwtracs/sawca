@@ -8,6 +8,21 @@
 }
 
 .source {
+  position: relative;
   border-bottom: solid 1px #e9ecef;
   margin-bottom: 3px;
+}
+
+.source .resend-area {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.resend {
+  display: none;
+}
+
+.failed .resend {
+  display: block;
 }

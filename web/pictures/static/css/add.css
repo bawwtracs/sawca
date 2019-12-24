@@ -38,6 +38,10 @@
   background-color: #f8d7da;
 }
 
+.list-group-item .resend {
+  display: none;
+}
+
 .list-group-item.failed p::after {
   color: #721c24;
   content: "请求失败,网络异常或未知原因!";
@@ -45,7 +49,7 @@
   height: 1rem;
   width: 20rem;
   top: 1rem;
-  right: 1.25rem;
+  right: 2.25rem;
   display: block;
 }
 
@@ -59,6 +63,10 @@
 
 .list-group-item.failed .result {
   display: none;
+}
+
+.list-group-item.failed .resend {
+  display: block;
 }
 
 .list-group-item p {
