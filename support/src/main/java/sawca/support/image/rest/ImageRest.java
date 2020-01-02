@@ -27,12 +27,12 @@ import java.util.List;
 @Log4j2
 @RestController
 @RequestMapping("/api")
-public class Rest {
+public class ImageRest {
 
     private static String addPath = "image/add";
     private static String searchPath = "image/search";
 
-    public Rest() {
+    public ImageRest() {
         try {
             Path addPhotoPath = Paths.get(addPath);
             if (!Files.exists(addPhotoPath)) {

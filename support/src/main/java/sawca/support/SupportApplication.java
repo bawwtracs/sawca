@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"sawca.support.image.mapper"})
+@MapperScan(basePackages = {"sawca.support.image.mapper", "sawca.support.office.mapper"})
 public class SupportApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
