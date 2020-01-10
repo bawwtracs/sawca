@@ -17,11 +17,11 @@ public class SystemRest {
     private UserRepository userRepository;
 
     @PostMapping("/user")
-    public User createUser(@RequestBody User request) {
-        return userRepository.save(request);
+    public User createUser(@RequestBody User user) {
+        return userRepository.save(user);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -33,9 +33,9 @@ public class SystemRest {
 
     @PutMapping("/user/{id}")
     public User updateUserById(@PathVariable("id") Long id, @RequestBody User
-            request) {
-        request.setId(id);
-        return userRepository.save(request);
+            user) {
+        user.setId(id);
+        return userRepository.save(user);
     }
 
 }

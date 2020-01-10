@@ -25,8 +25,8 @@ public class IMRest {
     private ChatGroupMemberRepository chatGroupMemberRepository;
 
     @PostMapping("/message")
-    public Message createMessage(@RequestBody Message request) {
-        return messageRepository.save(request);
+    public Message createMessage(@RequestBody Message message) {
+        return messageRepository.save(message);
     }
 
     @GetMapping("/message")
@@ -41,17 +41,17 @@ public class IMRest {
 
     @PutMapping("/message/{id}")
     public Message updateMessageById(@PathVariable("id") Long id, @RequestBody Message
-            request) {
-        request.setId(id);
-        return messageRepository.save(request);
+            message) {
+        message.setId(id);
+        return messageRepository.save(message);
     }
 
     @PostMapping("/group")
-    public ChatGroup createChatGroup(@RequestBody ChatGroup request) {
-        return chatGroupRepository.save(request);
+    public ChatGroup createChatGroup(@RequestBody ChatGroup group) {
+        return chatGroupRepository.save(group);
     }
 
-    @GetMapping("/group")
+    @GetMapping("/groups")
     public List<ChatGroup> getAllChatGroups() {
         return chatGroupRepository.findAll();
     }
@@ -63,17 +63,17 @@ public class IMRest {
 
     @PutMapping("/group/{id}")
     public ChatGroup updateChatGroupById(@PathVariable("id") Long id, @RequestBody ChatGroup
-            request) {
-        request.setId(id);
-        return chatGroupRepository.save(request);
+            group) {
+        group.setId(id);
+        return chatGroupRepository.save(group);
     }
 
     @PostMapping("/group/member")
-    public ChatGroupMember createChatGroupMember(@RequestBody ChatGroupMember request) {
-        return chatGroupMemberRepository.save(request);
+    public ChatGroupMember createChatGroupMember(@RequestBody ChatGroupMember groupMember) {
+        return chatGroupMemberRepository.save(groupMember);
     }
 
-    @GetMapping("/group/member")
+    @GetMapping("/group/members")
     public List<ChatGroupMember> getAllChatGroupMembers() {
         return chatGroupMemberRepository.findAll();
     }
@@ -85,9 +85,9 @@ public class IMRest {
 
     @PutMapping("/group/member/{id}")
     public ChatGroupMember updateChatGroupMemberById(@PathVariable("id") Long id, @RequestBody ChatGroupMember
-            request) {
-        request.setId(id);
-        return chatGroupMemberRepository.save(request);
+            groupMember) {
+        groupMember.setId(id);
+        return chatGroupMemberRepository.save(groupMember);
     }
 
 }

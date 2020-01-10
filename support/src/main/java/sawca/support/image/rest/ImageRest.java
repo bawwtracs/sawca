@@ -135,7 +135,7 @@ public class ImageRest {
         return requestRepository.save(request);
     }
 
-    @GetMapping("/request")
+    @GetMapping("/requests")
     public List<Request> getAllRequests() {
         return requestRepository.findAll();
     }
