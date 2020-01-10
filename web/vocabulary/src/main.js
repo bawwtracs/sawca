@@ -1,5 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
 // api
 import api from "./api";
@@ -14,6 +16,10 @@ Vue.use(VueAxios, axios);
 import { Locale } from "vant";
 import enUS from "vant/lib/locale/lang/en-US";
 Locale.use("en-US", enUS);
+import { Icon } from "vant";
+Vue.use(Icon);
+import { NavBar } from "vant";
+Vue.use(NavBar);
 import { Tab, Tabs } from "vant";
 Vue.use(Tab).use(Tabs);
 import { Cell, CellGroup } from "vant";
@@ -30,9 +36,13 @@ import { Picker } from "vant";
 Vue.use(Picker);
 import { Button } from "vant";
 Vue.use(Button);
+import { Divider } from 'vant';
+Vue.use(Divider);
 
 Vue.config.productionTip = false;
 
 new Vue({
+  router,
+  store,
   render: h => h(App)
 }).$mount("#app");

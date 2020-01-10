@@ -26,7 +26,10 @@ public class VocabularyRest {
     }
 
     @GetMapping("/words")
-    public List<Word> getAllWords() {
+    public List<Word> getAllWords(@RequestParam Long originId) {
+        if (originId != null) {
+            return wordRepository.findAllByOriginId(originId);
+        }
         return wordRepository.findAll();
     }
 

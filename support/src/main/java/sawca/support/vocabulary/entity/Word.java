@@ -42,6 +42,6 @@ public class Word implements Serializable {
     private String lang;
 
     @Column
-    private Long origin;
+    private Long originId;
 
 }

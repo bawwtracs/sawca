@@ -1,19 +1,8 @@
 <template>
   <div id="app">
-    <Origin msg="Origin" />
+    <router-view />
   </div>
 </template>
-
-<script>
-import Origin from "./components/Origin.vue";
-
-export default {
-  name: "app",
-  components: {
-    Origin
-  }
-};
-</script>
 
 <style>
 #app {

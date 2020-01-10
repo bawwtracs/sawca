@@ -6,7 +6,7 @@
           <template v-for="(indexItem, key) in originAdapter">
             <van-index-anchor :key="key" :index="key" />
             <van-swipe-cell v-for="originItem in originAdapter[key]" :key="originItem.id">
-              <van-cell :border="false" :title="originItem.name" />
+              <van-cell :border="false" :title="originItem.name" @click="toWords(originItem.id)" />
               <template slot="right">
                 <van-button
                   hairline
@@ -62,6 +62,9 @@ export default {
       this.name = "";
       this.type = "";
       this.source = "";
+    },
+    toWords(originId) {
+      this.$router.push(`/word/originId/${originId}`);
     },
     edit(origin) {
       this.currentId = origin.id;
