@@ -45,7 +45,14 @@
           <van-field v-model="source" rows="2" autosize label="Source" type="textarea" />
         </van-cell-group>
         <br />
-        <van-button type="primary" plain @click="submit" hairline>Submit</van-button>
+        <van-button
+          type="primary"
+          plain
+          @click="submit"
+          :disabled="submiting"
+          :loading="submiting"
+          hairline
+        >Submit</van-button>
       </van-tab>
     </van-tabs>
   </div>
@@ -98,6 +105,7 @@ export default {
       let name = this.name;
       let source = this.source;
       if (type && name) {
+        this.submiting = true;
         if (!this.currentId) {
           this.axios
             .post(this.api.origin(), {
@@ -106,6 +114,7 @@ export default {
               source
             })
             .then(response => {
+              this.submiting = false;
               this.origins.push(response.data);
               this.active = "list";
             });
@@ -117,6 +126,7 @@ export default {
               source
             })
             .then(response => {
+              this.submiting = false;
               this.origins = this.origins.map(obj => {
                 if (obj.id == response.data.id) {
                   return response.data;
@@ -185,7 +195,8 @@ export default {
       showTypePicker: false,
       originTypes: ["Book", "Site"],
       name: "",
-      source: ""
+      source: "",
+      submiting: false
     };
   }
 };

@@ -44,7 +44,14 @@
       </van-cell-group>
       <br />
       <van-button type="warning" plain @click="reset" hairline>Reset</van-button>
-      <van-button type="primary" plain @click="submit" hairline>Submit</van-button>
+      <van-button
+        type="primary"
+        plain
+        @click="submit"
+        :disabled="submiting"
+        :loading="submiting"
+        hairline
+      >Submit</van-button>
     </van-popup>
   </div>
 </template>
@@ -100,6 +107,7 @@ export default {
       let representations = this.representations;
       let originId = this.originId;
       if (spelling && representations) {
+        this.submiting = true;
         this.axios
           .post(this.api.word(), {
             spelling,
@@ -108,6 +116,7 @@ export default {
             originId
           })
           .then(response => {
+            this.submiting = false;
             this.words.push(response.data);
             this.showEditor = false;
           });
@@ -158,7 +167,8 @@ export default {
       representations: "",
       showEditor: false,
       showWord: false,
-      words: []
+      words: [],
+      submiting: false
     };
   }
 };
