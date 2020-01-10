@@ -1,10 +1,10 @@
 package sawca.support.office.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 import sawca.support.office.entity.DocumentEditor;
 import sawca.support.office.mapper.DocumentEditorMapper;
 import sawca.support.office.service.IDocumentEditorService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>

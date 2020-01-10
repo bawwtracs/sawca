@@ -1,7 +1,7 @@
 package sawca.support.office.mapper;
 
-import sawca.support.office.entity.DocumentEditor;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import sawca.support.office.entity.DocumentEditor;
 
 /**
  * <p>

@@ -1,6 +1,6 @@
 let portoal = "http";
-let host = "a8cdf429.ngrok.io";
-let port = "80";
+let host = "192.168.0.54";
+let port = "18080";
 
 let api = {
   origins: () => {

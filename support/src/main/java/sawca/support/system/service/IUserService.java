@@ -1,7 +1,7 @@
 package sawca.support.system.service;
 
-import sawca.support.system.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import sawca.support.system.entity.User;
 
 /**
  * <p>

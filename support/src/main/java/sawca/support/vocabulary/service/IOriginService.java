@@ -1,7 +1,7 @@
 package sawca.support.vocabulary.service;
 
-import sawca.support.vocabulary.entity.Origin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import sawca.support.vocabulary.entity.Origin;
 
 /**
  * <p>

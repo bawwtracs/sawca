@@ -1,7 +1,7 @@
 package sawca.support.im.service;
 
-import sawca.support.im.entity.Message;
 import com.baomidou.mybatisplus.extension.service.IService;
+import sawca.support.im.entity.Message;
 
 /**
  * <p>

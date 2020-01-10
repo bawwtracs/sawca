@@ -1,10 +1,10 @@
 package sawca.support.vocabulary.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 import sawca.support.vocabulary.entity.Word;
 import sawca.support.vocabulary.mapper.WordMapper;
 import sawca.support.vocabulary.service.IWordService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>

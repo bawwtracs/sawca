@@ -1,7 +1,7 @@
 package sawca.support.vocabulary.mapper;
 
-import sawca.support.vocabulary.entity.Word;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import sawca.support.vocabulary.entity.Word;
 
 /**
  * <p>

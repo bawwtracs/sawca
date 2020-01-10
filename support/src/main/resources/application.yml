@@ -5,7 +5,6 @@ server:
   tomcat:
     max-threads: 200
     uri-encoding: UTF-8
-  address: 0.0.0.0
 logging:
   file:
     max-history: 30

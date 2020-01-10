@@ -1,7 +1,7 @@
 package sawca.support.image.mapper;
 
-import sawca.support.image.entity.RequestImage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import sawca.support.image.entity.RequestImage;
 
 /**
  * <p>

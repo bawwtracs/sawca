@@ -1,7 +1,7 @@
 package sawca.support.image.repository;
 
-import sawca.support.image.entity.RequestImage;
 import org.springframework.data.jpa.repository.JpaRepository;
+import sawca.support.image.entity.RequestImage;
 
 public interface RequestImageRepository extends JpaRepository<RequestImage, Long> {
 }
