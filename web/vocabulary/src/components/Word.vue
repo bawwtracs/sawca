@@ -22,7 +22,7 @@
     </van-index-bar>
 
     <van-popup class="pd-20" v-model="showWord" position="bottom">
-      {{spelling}} .{{lang}}.{{showWord}}
+      {{spelling}} .{{lang}}
       <van-divider />
       {{representations}}
     </van-popup>
@@ -100,7 +100,7 @@ export default {
         message: `${word.spelling}`
       })
         .then(() => {
-          this.axios.delete(this.api.origin(word.id)).then(response => {
+          this.axios.delete(this.api.word(word.id)).then(response => {
             this.words = this.words.filter(obj => {
               return obj.id != response.data;
             });

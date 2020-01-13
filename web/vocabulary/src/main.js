@@ -36,10 +36,8 @@ import { Picker } from "vant";
 Vue.use(Picker);
 import { Button } from "vant";
 Vue.use(Button);
-import { Divider } from 'vant';
+import { Divider } from "vant";
 Vue.use(Divider);
-import { Overlay } from 'vant';
-Vue.use(Overlay);
 
 Vue.config.productionTip = false;
 
