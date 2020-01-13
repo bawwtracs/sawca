@@ -1,6 +1,7 @@
 <template>
   <div>
     <van-nav-bar
+      :fixed="true"
       title="Words"
       left-text="Back"
       left-arrow
@@ -9,7 +10,7 @@
     >
       <van-icon name="plus" slot="right" />
     </van-nav-bar>
-    <van-index-bar :index-list="indexAdapter">
+    <van-index-bar :index-list="indexAdapter" style="padding-top:46px;" :sticky="false">
       <template v-for="(indexItem, key) in wordAdapter">
         <van-index-anchor :key="key" :index="key" />
         <van-swipe-cell v-for="wordItem in wordAdapter[key]" :key="wordItem.id">
