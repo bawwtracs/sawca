@@ -20,26 +20,37 @@
         </van-swipe-cell>
       </template>
     </van-index-bar>
-    <van-popup v-model="showWord" round position="bottom" :style="{ height: '60%' }">
-      <van-divider />
-      {{spelling}} .{{lang}}
+
+    <van-popup class="pd-20" v-model="showWord" position="bottom">
+      {{spelling}} .{{lang}}.{{showWord}}
       <van-divider />
       {{representations}}
-      <van-divider />
     </van-popup>
+
     <van-popup v-model="showEditor" position="bottom" :style="{ height: '80%' }">
       <van-cell-group>
-        <div class="block-title">Lang</div>
-        <van-field v-model="lang" input-align="center" placeholder="lang" />
-        <div class="block-title">Spelling</div>
-        <van-field v-model="spelling" input-align="center" placeholder="spelling" />
-        <div class="block-title">Representations</div>
+        <van-field
+          label="Lang"
+          v-model="lang"
+          input-align="center"
+          placeholder="input langauage"
+          clearable="true"
+        />
+        <van-field
+          label="Spelling"
+          v-model="spelling"
+          input-align="center"
+          placeholder="input word"
+          clearable="true"
+        />
         <van-field
           v-model="representations"
           rows="2"
           autosize
           type="textarea"
-          placeholder="representations"
+          input-align="center"
+          placeholder="input representations here"
+          clearable="true"
         />
       </van-cell-group>
       <br />
@@ -72,6 +83,9 @@ export default {
       this.spelling = word.spelling;
       this.representations = word.representations;
       this.lang = word.lang;
+    },
+    hide() {
+      this.showWord = false;
     },
     getWords() {
       this.axios
@@ -175,13 +189,7 @@ export default {
 </script>
 
 <style>
-.block-title {
-  margin: 0;
-  padding: 32px 16px 16px;
-  background: #f7f8fa;
-  color: rgba(69, 90, 100, 0.6);
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
+.pd-20 {
+  padding: 20px 0;
 }
 </style>

@@ -8,6 +8,7 @@ import sawca.support.vocabulary.repository.OriginRepository;
 import sawca.support.vocabulary.repository.WordRepository;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 import java.util.List;
 
 @Log4j2
@@ -22,6 +23,8 @@ public class VocabularyRest {
 
     @PostMapping("/word")
     public Word createWord(@RequestBody Word word) {
+        Long timestamp = Calendar.getInstance().getTimeInMillis();
+        word.setTimestamp(timestamp);
         return wordRepository.save(word);
     }
 

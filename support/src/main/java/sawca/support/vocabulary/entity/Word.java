@@ -44,4 +44,6 @@ public class Word implements Serializable {
     @Column
     private Long originId;
 
+    @Column
+    private Long timestamp;
 }
