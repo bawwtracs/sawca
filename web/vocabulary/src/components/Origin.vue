@@ -9,6 +9,7 @@
               <van-cell :border="false" :title="originItem.name" @click="toWords(originItem.id)" />
               <template slot="right">
                 <van-button
+                  style="height:100%"
                   hairline
                   size="small"
                   type="primary"
@@ -16,6 +17,7 @@
                   @click="edit(originItem)"
                 />
                 <van-button
+                  style="height:100%"
                   hairline
                   size="small"
                   type="danger"
@@ -45,14 +47,17 @@
           <van-field v-model="source" rows="2" autosize label="Source" type="textarea" />
         </van-cell-group>
         <br />
-        <van-button
-          type="primary"
-          plain
-          @click="submit"
-          :disabled="submiting"
-          :loading="submiting"
-          hairline
-        >Submit</van-button>
+        <div style="text-align:center;">
+          <van-button
+            type="primary"
+            plain
+            @click="submit"
+            :disabled="submiting"
+            :loading="submiting"
+            hairline
+          >Submit</van-button>
+        </div>
+        <br />
       </van-tab>
     </van-tabs>
   </div>

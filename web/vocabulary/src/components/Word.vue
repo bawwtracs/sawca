@@ -15,13 +15,20 @@
         <van-swipe-cell v-for="wordItem in wordAdapter[key]" :key="wordItem.id">
           <van-cell :border="false" :title="wordItem.spelling" @click="show(wordItem)" />
           <template slot="right">
-            <van-button hairline size="small" type="danger" text="del" @click="del(wordItem)" />
+            <van-button
+              style="height:100%"
+              hairline
+              size="small"
+              type="danger"
+              text="del"
+              @click="del(wordItem)"
+            />
           </template>
         </van-swipe-cell>
       </template>
     </van-index-bar>
 
-    <van-popup class="pd-20" v-model="showWord" position="bottom">
+    <van-popup style="text-align:center;" class="pd-20" v-model="showWord" position="bottom">
       {{spelling}} .{{lang}}
       <van-divider />
       {{representations}}
@@ -34,14 +41,14 @@
           v-model="lang"
           input-align="center"
           placeholder="input langauage"
-          clearable="true"
+          :clearable="true"
         />
         <van-field
           label="Spelling"
           v-model="spelling"
           input-align="center"
           placeholder="input word"
-          clearable="true"
+          :clearable="true"
         />
         <van-field
           v-model="representations"
@@ -50,25 +57,30 @@
           type="textarea"
           input-align="center"
           placeholder="input representations here"
-          clearable="true"
+          :clearable="true"
         />
       </van-cell-group>
       <br />
-      <van-button type="warning" plain @click="reset" hairline>Reset</van-button>
-      <van-button
-        type="primary"
-        plain
-        @click="submit"
-        :disabled="submiting"
-        :loading="submiting"
-        hairline
-      >Submit</van-button>
+      <div style="text-align:center;">
+        <van-button type="warning" plain @click="reset" hairline>Reset</van-button>
+        <van-button
+          type="primary"
+          plain
+          @click="submit"
+          :disabled="submiting"
+          :loading="submiting"
+          hairline
+        >Submit</van-button>
+      </div>
     </van-popup>
   </div>
 </template>
 
 <script>
 import { Dialog } from "vant";
+
+const _ = require("lodash");
+
 export default {
   name: "Word",
   props: {
@@ -146,16 +158,19 @@ export default {
   },
   computed: {
     wordAdapter() {
+      let words = _.sortBy(this.words, obj => {
+        return obj.spelling.toUpperCase();
+      });
       let letterSet = {};
-      for (let i = 0; i < this.words.length; i++) {
-        let firstLetter = this.words[i].spelling
+      for (let i = 0; i < words.length; i++) {
+        let firstLetter = words[i].spelling
           .charAt(0)
           .toString()
           .toUpperCase();
         if (!letterSet[firstLetter]) {
           letterSet[firstLetter] = [];
         }
-        letterSet[firstLetter].push(this.words[i]);
+        letterSet[firstLetter].push(words[i]);
       }
       return letterSet;
     },
@@ -168,7 +183,9 @@ export default {
           .toUpperCase();
         letterSet.add(firstLetter);
       }
-      return Array.from(letterSet);
+      return _.sortBy(Array.from(letterSet), obj => {
+        return obj.toUpperCase();
+      });
     }
   },
   created() {
