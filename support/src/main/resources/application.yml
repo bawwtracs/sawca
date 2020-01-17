@@ -17,7 +17,7 @@ spring:
       enabled: true
       maxFileSize: -1
   mvc:
-    static-path-pattern: /static/**
+    static-path-pattern: /**
   resources:
     static-locations: classpath:/static/
   datasource:

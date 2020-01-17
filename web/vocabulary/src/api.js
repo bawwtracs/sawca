@@ -1,5 +1,5 @@
 let portoal = "http";
-let host = "192.168.0.54";
+let host = "localhost";
 let port = "18080";
 
 let api = {

@@ -2,6 +2,7 @@
   <div>
     <van-nav-bar
       :fixed="true"
+      :z-index="999"
       title="Words"
       left-text="Back"
       left-arrow
@@ -10,7 +11,12 @@
     >
       <van-icon name="plus" slot="right" />
     </van-nav-bar>
-    <van-index-bar :index-list="indexAdapter" style="padding-top:46px;" :sticky="false">
+    <van-index-bar
+      :index-list="indexAdapter"
+      style="padding-top:46px;"
+      :sticky="true"
+      :sticky-offset-top="46"
+    >
       <template v-for="(indexItem, key) in wordAdapter">
         <van-index-anchor :key="key" :index="key" />
         <van-swipe-cell v-for="wordItem in wordAdapter[key]" :key="wordItem.id">
@@ -32,10 +38,10 @@
     <van-popup style="text-align:center;" class="pd-20" v-model="showWord" position="bottom">
       {{spelling}} .{{lang}}
       <van-divider />
-      {{representations}}
+      <pre>{{representationsAdapter}}</pre>
     </van-popup>
 
-    <van-popup v-model="showEditor" position="bottom" :style="{ height: '80%' }">
+    <van-popup v-model="showEditor" position="bottom">
       <van-cell-group>
         <van-field
           label="Lang"
@@ -72,6 +78,7 @@
           :loading="submiting"
           hairline
         >Submit</van-button>
+        <van-divider />
       </div>
     </van-popup>
   </div>
@@ -187,6 +194,11 @@ export default {
       return _.sortBy(Array.from(letterSet), obj => {
         return obj.toUpperCase();
       });
+    },
+    representationsAdapter() {
+      return this.representations
+        .replace("adj.", "\nadj.")
+        .replace("n.", "\nn.");
     }
   },
   created() {
