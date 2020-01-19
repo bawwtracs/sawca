@@ -183,22 +183,21 @@ export default {
       return letterSet;
     },
     indexAdapter() {
+      let words = _.sortBy(this.words, obj => {
+        return obj.spelling.toUpperCase();
+      });
       let letterSet = new Set();
-      for (let i = 0; i < this.words.length; i++) {
-        let firstLetter = this.words[i].spelling
+      for (let i = 0; i < words.length; i++) {
+        let firstLetter = words[i].spelling
           .charAt(0)
           .toString()
           .toUpperCase();
         letterSet.add(firstLetter);
       }
-      return _.sortBy(Array.from(letterSet), obj => {
-        return obj.toUpperCase();
-      });
+      return Array.from(letterSet);
     },
     representationsAdapter() {
-      return this.representations
-        .replace("adj.", "\nadj.")
-        .replace("n.", "\nn.");
+      return this.representations;
     }
   },
   created() {
