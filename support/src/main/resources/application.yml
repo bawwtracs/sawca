@@ -32,7 +32,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     show-sql: true
-    open-in-view: false
+    open-in-view: on
 wozhitu:
   api:
     host: http://www.tudatech.com:8086
