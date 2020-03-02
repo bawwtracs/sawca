@@ -23,7 +23,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/sawca?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
-    password: '_Jj43^66'
+    password: 'mcxxkj2020@db04'
   jpa:
     properties:
       hibernate:

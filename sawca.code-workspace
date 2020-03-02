@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.encoding": "utf8",
+    // base
+    // "python.pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe"
+    // ai
+    // "python.pythonPath": "C:\\Users\\IBM\\.conda\\envs\\ai\\python.exe",
+    // vision
+    // "python.pythonPath": "C:\\Users\\IBM\\.conda\\envs\\vision\\python.exe"
+    "python.pythonPath": "C:\\Users\\IBM\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
+  }
+}
