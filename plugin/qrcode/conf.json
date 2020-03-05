@@ -1,5 +1,9 @@
 {
+  "save": true,
+  "writePath": "/data/workspace/zqoa/webapps/app/loginCuts/",
+  "thresh": "THRESH_BINARY_INV",
   "process": [
+    { "operation": "thresh", "thresh": "THRESH_BINARY_INV" },
     {
       "operation": "hsv_format",
       "lower": {
@@ -38,8 +42,6 @@
       "k": 1
     }
   ],
-  "save": true,
-  "writePath": "/data/workspace/zqoa/webapps/app/loginCuts/",
   "remark": {
     "processKey": {
       "connnected_area": "连通域",
@@ -78,6 +80,10 @@
       },
       "neighbour_four": {
         "k": "过滤阈值"
+      },
+      "thresh": {
+        "THRESH_BINARY": "黑色（0）背景，白色（255）目标",
+        "THRESH_BINARY_INV": "白色（255）背景，黑色（255）目标"
       }
     }
   }
