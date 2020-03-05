@@ -1,0 +1,84 @@
+{
+  "process": [
+    {
+      "operation": "hsv_format",
+      "lower": {
+        "h": 35,
+        "s": 43,
+        "v": 46
+      },
+      "upper": {
+        "h": 77,
+        "s": 255,
+        "v": 255
+      }
+    },
+    {
+      "operation": "morph",
+      "structuring_element": "rect",
+      "size": { "width": 3, "height": 1 },
+      "morph": "erode"
+    },
+    {
+      "operation": "morph",
+      "structuring_element": "rect",
+      "size": { "width": 2, "height": 2 },
+      "morph": "dilate"
+    },
+    {
+      "operation": "connected_area",
+      "k": 10
+    },
+    {
+      "operation": "neighbour_eight",
+      "k": 3
+    },
+    {
+      "operation": "neighbour_four",
+      "k": 1
+    }
+  ],
+  "save": true,
+  "writePath": "/data/workspace/zqoa/webapps/app/loginCuts/",
+  "remark": {
+    "processKey": {
+      "connnected_area": "连通域",
+      "hsv_format": "颜色过滤",
+      "morph": "形态学变形",
+      "neighbour_eight": "八邻域过滤",
+      "neighbour_four": "四邻域过滤"
+    },
+    "processParam": {
+      "connected_area": {
+        "k": "过滤面积阈值"
+      },
+      "hsv_format": {
+        "lower": "hsv最小值",
+        "upper": "hsv最大值"
+      },
+      "morph": {
+        "structuring_element": {
+          "shape": {
+            "rect": "矩形",
+            "ellipse": "椭圆",
+            "cross": "十字交叉"
+          },
+          "size": {
+            "width": "横向单位长度",
+            "height": "纵向单位长度"
+          }
+        },
+        "erode": "腐蚀",
+        "dilate": "膨胀",
+        "open": "开",
+        "close": "闭"
+      },
+      "neighbour_eight": {
+        "k": "过滤阈值"
+      },
+      "neighbour_four": {
+        "k": "过滤阈值"
+      }
+    }
+  }
+}
