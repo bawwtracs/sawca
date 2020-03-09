@@ -1,6 +1,6 @@
 from cv2 import cv2
 
-img = cv2.imread("ocr1.png")
+img = cv2.imread("1.jpg")
 
 gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
@@ -20,14 +20,14 @@ def onthreshold(x):
         gauss, value, maxvalue, cv2.THRESH_TOZERO_INV)
     if(a):
         cv2.imshow("Binary", binary)
-    if(b):
-        cv2.imshow("Binary_INV", binary_inv)
-    if(c):
-        cv2.imshow("TRUNC", trunc)
-    if(d):
-        cv2.imshow("TO_ZERO", to_zero)
-    if(e):
-        cv2.imshow("TO_ZERO_INV", to_zero_inv)
+    # if(b):
+    #     cv2.imshow("Binary_INV", binary_inv)
+    # if(c):
+    #     cv2.imshow("TRUNC", trunc)
+    # if(d):
+    #     cv2.imshow("TO_ZERO", to_zero)
+    # if(e):
+    #     cv2.imshow("TO_ZERO_INV", to_zero_inv)
 
 
 cv2.namedWindow("Threshold")
