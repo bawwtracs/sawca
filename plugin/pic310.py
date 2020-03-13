@@ -1,9 +1,9 @@
-from cv2 import cv2
+from cv2 import cv2 as cv2
 from PIL import Image
-import numpy as np
 import pytesseract
-import sys
+import numpy as np
 import re
+import sys
 
 
 def noise_4(img_array, k):
@@ -48,32 +48,24 @@ def noise_4(img_array, k):
                 img_array[_w, _h] = 255
 
 
-def get_code(imagePath):
+def recognize_text():
+    gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-    # 原图
-    # src = cv2.imread('tt3.png')
-    src = cv2.imread('test.png')
+    # 二值化
+    binary = cv2.adaptiveThreshold(
+        ~gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 35, -5)
 
-    # 提取绿色验证码部分
-    hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
-    low_hsv = np.array([36, 43, 46])
-    high_hsv = np.array([77, 255, 245])
-    mask = cv2.inRange(hsv, lowerb=low_hsv, upperb=high_hsv)
+    # # 二值化
+    # ret, binary = cv2.threshold(
+    #     gray, 190, 255, cv2.THRESH_BINARY)
 
-    ret, binary = cv2.threshold(
-        mask, 0, 255, cv2.THRESH_BINARY_INV)
-
-    cv2.imwrite('tmp/binary.jpg', mask)
-
+    cv2.imwrite('tmp310/0_binary.jpg', binary)
     noise_4(binary, 2)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-
-    textImage = Image.fromarray(src)
-    text = pytesseract.image_to_string(textImage, config='', lang='chi_sim')
-    print("Result:%s" % re.sub('\n', '', text))
+    cv2.imwrite("tmp310/1_noise4.jpg", binary)
+    textImage = Image.fromarray(binary)
+    text = pytesseract.image_to_string(textImage, lang='chi_sim')
+    print("%s" % re.sub(' ', '', text))
 
 
-# if __name__ == '__main__':
-#     imagePath = sys.argv[1]
-get_code('')
+src = cv2.imread('310.jpg', 1)
+recognize_text()

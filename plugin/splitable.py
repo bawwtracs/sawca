@@ -4,59 +4,63 @@ from PIL import Image
 import pytesseract
 import random
 
+'''
+    调整腐蚀卷积核以控制识别直线的长短，避免文本没有被过滤
+'''
+
 image = cv2.imread('fw.jpg', 1)
 # 灰度图片
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # 二值化
 binary = cv2.adaptiveThreshold(
     ~gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 35, -5)
-# gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-# ret, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
-#ret,binary = cv2.threshold(~gray, 127, 255, cv2.THRESH_BINARY)
-cv2.imshow("Threshold", binary)  # 展示图片
+# cv2.imshow("Threshold", binary)  # 展示图片
 cv2.waitKey(0)
 
 rows, cols = binary.shape
-scale = 40
+scale = 60
 # 识别横线
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (cols//scale, 1))
 eroded = cv2.erode(binary, kernel, iterations=1)
 # cv2.imshow("Eroded Image", eroded)
 dilatedcol = cv2.dilate(eroded, kernel, iterations=1)
-cv2.imshow("hor", dilatedcol)
+cv2.imwrite("tmp_split/hor.jpg", dilatedcol)
 cv2.waitKey(0)
 
 # 识别竖线
-scale = 20
+scale = 30
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, rows//scale))
 eroded = cv2.erode(binary, kernel, iterations=1)
 dilatedrow = cv2.dilate(eroded, kernel, iterations=1)
-cv2.imshow("ver", dilatedrow)
+# cv2.imshow("ver", dilatedrow)
+cv2.imwrite("tmp_split/ver.jpg", dilatedrow)
 cv2.waitKey(0)
 
 # 标识交点
 bitwiseAnd = cv2.bitwise_and(dilatedcol, dilatedrow)
-cv2.imshow("cors", bitwiseAnd)
+# cv2.imwrite("tmp_split_ver.jpg", dilatedcol)
+cv2.imwrite("tmp_split/cors.jpg", bitwiseAnd)
 cv2.waitKey(0)
 # cv2.imwrite("my.png",bitwiseAnd) #将二值像素点生成图片保存
 
 # 标识表格
 merge = cv2.add(dilatedcol, dilatedrow)
-cv2.imshow("table", merge)
+# cv2.imshow("table", merge)
+cv2.imwrite('tmp_split/table.jpg', merge)
 cv2.waitKey(0)
 
 
 # 两张图片进行减法运算，去掉表格框线
 merge2 = cv2.subtract(binary, merge)
-cv2.imshow("reove table", merge2)
+# cv2.imshow("reove table", merge2)
+cv2.imwrite('tmp_split/table2.jpg', merge2)
 cv2.waitKey(0)
 
 # 去垂直线后图片
 ret, binary = cv2.threshold(
     merge2, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
-cv2.imshow("target", binary)
-cv2.imwrite('tmp_line/line' +
-            str(random.randint(0, 999))+'.jpg', binary)
+# cv2.imshow("target", binary)
+cv2.imwrite('tmp_split/finally.jpg', binary)
 cv2.waitKey(0)
 
 # 识别黑白图中的白色交叉点，将横纵坐标取出
@@ -103,7 +107,7 @@ for i in range(len(mylisty)-1):
         cv2.imwrite('tmp/' +
                     str(i) + '_' + str(j) + '.jpg', ROI)
         # textImage = Image.fromarray(ROI)
-        # text1 = pytesseract.image_to_string(textImage)
+        # text1 = pytesseract.image_to_string(textImage, lang="chi_sim")
         # print("Result:%s"%text1)
         #text2 = ''.join([char for char in text2 if char not in special_char_list])
         # print('识别分割子图片信息为：'+text1)

@@ -99,18 +99,29 @@ def noise_4(img_array, k):
 
 def recognize_text():
     gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+
     # 二值化
     ret, binary = cv2.threshold(
-        gray, 165, 255, cv2.THRESH_BINARY)
-    # cv2.imshow("threshold", binary)
-    noise_4(binary, 2)
-    # cv2.imshow("noise_4", binary)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+        gray, 190, 255, cv2.THRESH_BINARY)
+
+    # # 二值化
+    # binary = cv2.adaptiveThreshold(
+    #     ~gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 35, -5)
+
+    cv2.imwrite('tmp219/0_binary.jpg', binary)
+
+    # kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
+    # bin1 = cv2.erode(binary, kernel)
+
+    # cv2.imwrite('tmp/1_erode22.jpg', bin1)
+
+    noise_8(binary, 3)
+    cv2.imwrite('tmp219/1_noise8.jpg', binary)
+
     textImage = Image.fromarray(binary)
     text = pytesseract.image_to_string(textImage, lang='chi_sim')
     print("%s" % re.sub(' ', '', text))
 
 
-src = cv2.imread(sys.argv[1], 1)
+src = cv2.imread('pic0219.jpg', 1)
 recognize_text()

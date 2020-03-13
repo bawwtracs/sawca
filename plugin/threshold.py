@@ -1,6 +1,10 @@
 from cv2 import cv2
 
-img = cv2.imread("1.jpg")
+'''
+    函数用来获取全局二值化的阈值
+'''
+
+img = cv2.imread("ocr_1.jpg")
 
 gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
