@@ -17,6 +17,7 @@ const messages = {
 }
 const i18n = new VueI18n({
     locale: 'en-US',
+    // locale: 'zh-CN',
     messages,
 })
 import { Locale } from 'vant';

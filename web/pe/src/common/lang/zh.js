@@ -1,6 +1,6 @@
 export const message = {
     wel: '欢迎',
-    advice: '来这儿找点灵感',
+    advice: '这里能够找到灵感',
     username: '用户名',
     password: '密码',
     login: '登录',

@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import util from "../util";
-
 export default {
   name: "Login",
   data() {
@@ -54,7 +52,8 @@ export default {
           let res = response.data;
           if (res.succ) {
             let _id = res.data._id;
-            console.log(util.hexString(_id));
+            let ObjectId = require('../common/util/idHex');
+            console.log(ObjectId.hexString(_id));
           } else {
             this.$toast.fail(res.msg);
           }
