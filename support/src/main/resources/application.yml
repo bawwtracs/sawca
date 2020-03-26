@@ -21,9 +21,9 @@ spring:
   resources:
     static-locations: classpath:/static/
   datasource:
-    url: jdbc:mysql://localhost:3306/sawca?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3307/sawca?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
     username: root
-    password: 'mcxxkj2020@db04'
+    password: '_Jj43^66'
   jpa:
     properties:
       hibernate:
@@ -33,6 +33,9 @@ spring:
         format_sql: true
     show-sql: true
     open-in-view: on
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/sawca
 wozhitu:
   api:
     host: http://www.tudatech.com:8086

@@ -12,6 +12,6 @@
     // "python.pythonPath": "C:\\Users\\IBM\\.conda\\envs\\ai\\python.exe",
     // vision
     // "python.pythonPath": "C:\\Users\\IBM\\.conda\\envs\\vision\\python.exe"
-    "python.pythonPath": "C:\\Users\\IBM\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
+    // "python.pythonPath": "C:\\Users\\IBM\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
   }
 }
