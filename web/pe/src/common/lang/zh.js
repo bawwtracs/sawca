@@ -1,10 +1,21 @@
 export const message = {
     wel: '欢迎',
     advice: '这里能够找到灵感',
+    login: '登录',
+    email: '邮箱',
     username: '用户名',
     password: '密码',
-    login: '登录',
+    checkPass: "确认密码",
     guest: '游客',
     register: '注册',
-    forgotPassword: '忘记密码'
+    forgotPassword: '忘记密码',
+    reset: '重置',
+    cancel: '取消',
+    registerTips: '今天开始加入柿子社区！',
+    emptyEmail: '请输入邮箱',
+    emailError: '请输入正确邮箱',
+    emptyUsername: '请输入用户名',
+    emptyPassword: '请输入密码',
+    emptyCheckPass: '请再次输入密码',
+    checkPassError: '两次密码不一致'
 }

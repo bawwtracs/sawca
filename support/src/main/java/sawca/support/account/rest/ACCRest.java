@@ -1,11 +1,9 @@
 package sawca.support.account.rest;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.purgeteam.dispose.starter.exception.category.BusinessException;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
-import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -24,6 +22,7 @@ public class ACCRest {
 
     @PostMapping("/register")
     public JSONObject register(@RequestBody JSONObject jsonObject) {
+        String email = jsonObject.getString("email");
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
         String confirm = jsonObject.getString("confirm");
@@ -36,7 +35,15 @@ public class ACCRest {
         if (account != null) {
             throw new BusinessException("801", "this username has been registered");
         }
-        return mongoTemplate.insert(jsonObject, "account");
+        query = new Query();
+        query.addCriteria((new Criteria().and("email").is(email)));
+        account = mongoTemplate.findOne(query, JSONObject.class, "account");
+        if (account != null) {
+            throw new BusinessException("802", "this email has been registered");
+        }
+        account = mongoTemplate.insert(jsonObject, "account");
+        accountFilter(account);
+        return account;
     }
 
     @PostMapping("/login")

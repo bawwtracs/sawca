@@ -24,7 +24,7 @@
       <van-button class="visit" round block native-type="button">{{ $t("message.guest") }} ></van-button>
     </van-form>
     <div class="link">
-      <el-link type="primary">{{ $t("message.register") }}</el-link>
+      <el-link @click="toRegister" type="primary">{{ $t("message.register") }}</el-link>
       <b>&emsp;|&emsp;</b>
       <el-link type="primary">{{ $t("message.forgotPassword") }}</el-link>
     </div>
@@ -51,20 +51,23 @@ export default {
         .then(response => {
           let res = response.data;
           if (res.succ) {
-            let _id = res.data._id;
-            let ObjectId = require('../common/util/idHex');
-            console.log(ObjectId.hexString(_id));
+            let account = res.data;
+            let ObjectId = require("../common/util/idHex");
+            account._id = ObjectId.hexString(account._id);
+            this.cache["account"] = JSON.stringify(account);
+            this.$router.push("/index");
           } else {
             this.$toast.fail(res.msg);
           }
         })
         .catch(() => {});
+    },
+    toRegister() {
+      this.$router.push("/register");
     }
   },
   created() {
-    setTimeout(() => {
-      this.login = "login";
-    }, 500);
+    this.login = "login";
   }
 };
 </script>
@@ -90,7 +93,6 @@ export default {
 }
 
 .login {
-  background: #f4f5f8;
   box-sizing: border-box;
   padding: 0 8pt;
   width: 100%;

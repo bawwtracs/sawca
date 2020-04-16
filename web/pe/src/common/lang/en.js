@@ -2,9 +2,20 @@ export const message = {
     wel: 'Hello',
     advice: 'Find some inspiration from here',
     login: 'Login',
+    email: 'Email',
     username: 'Username',
     password: 'Password',
+    checkPass: "Check Password",
     guest: 'Guest',
     register: 'Register',
-    forgotPassword: 'Forgot Password'
+    forgotPassword: 'Forgot Password',
+    reset: 'Reset',
+    cancel: 'Cancel',
+    registerTips: 'Join us today',
+    emptyEmail: 'Please enter email',
+    emailError: 'email is invalid',
+    emptyUsername: 'Please enter username',
+    emptyPassword: 'Please enter password',
+    emptyCheckPass: 'Please enter password again',
+    checkPassError: 'confirm password failed'
 }

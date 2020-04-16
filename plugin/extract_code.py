@@ -48,11 +48,10 @@ def noise_4(img_array, k):
                 img_array[_w, _h] = 255
 
 
-def get_code(imagePath):
+def get_code(imagePath, k):
 
     # 原图
-    # src = cv2.imread('tt3.png')
-    src = cv2.imread('test.png')
+    src = cv2.imread(imagePath)
 
     # 提取绿色验证码部分
     hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
@@ -63,9 +62,9 @@ def get_code(imagePath):
     ret, binary = cv2.threshold(
         mask, 0, 255, cv2.THRESH_BINARY_INV)
 
-    cv2.imwrite('tmp/binary.jpg', mask)
+    # cv2.imwrite('tmp/binary.jpg', mask)
 
-    noise_4(binary, 2)
+    noise_4(binary, k)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
@@ -74,6 +73,9 @@ def get_code(imagePath):
     print("Result:%s" % re.sub('\n', '', text))
 
 
-# if __name__ == '__main__':
-#     imagePath = sys.argv[1]
-get_code('')
+if __name__ == '__main__':
+    imagePath = sys.argv[1]
+    k = int(sys.argv[2])
+    if k == 0:
+        k = 2
+    get_code(imagePath, k)
