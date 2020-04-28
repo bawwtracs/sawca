@@ -3,9 +3,7 @@ package sawca.support.im.rest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import sawca.support.im.entity.ChatGroup;
-import sawca.support.im.entity.ChatGroupMember;
 import sawca.support.im.entity.Message;
-import sawca.support.im.repository.ChatGroupMemberRepository;
 import sawca.support.im.repository.ChatGroupRepository;
 import sawca.support.im.repository.MessageRepository;
 
@@ -21,8 +19,6 @@ public class IMRest {
     private MessageRepository messageRepository;
     @Resource
     private ChatGroupRepository chatGroupRepository;
-    @Resource
-    private ChatGroupMemberRepository chatGroupMemberRepository;
 
     @PostMapping("/message")
     public Message createMessage(@RequestBody Message message) {
@@ -66,28 +62,6 @@ public class IMRest {
             group) {
         group.setId(id);
         return chatGroupRepository.save(group);
-    }
-
-    @PostMapping("/group/member")
-    public ChatGroupMember createChatGroupMember(@RequestBody ChatGroupMember groupMember) {
-        return chatGroupMemberRepository.save(groupMember);
-    }
-
-    @GetMapping("/group/members")
-    public List<ChatGroupMember> getAllChatGroupMembers() {
-        return chatGroupMemberRepository.findAll();
-    }
-
-    @GetMapping("/group/member/{id}")
-    public ChatGroupMember getChatGroupMemberById(@PathVariable("id") Long id) {
-        return chatGroupMemberRepository.getOne(id);
-    }
-
-    @PutMapping("/group/member/{id}")
-    public ChatGroupMember updateChatGroupMemberById(@PathVariable("id") Long id, @RequestBody ChatGroupMember
-            groupMember) {
-        groupMember.setId(id);
-        return chatGroupMemberRepository.save(groupMember);
     }
 
 }

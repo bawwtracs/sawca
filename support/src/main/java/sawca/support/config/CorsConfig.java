@@ -1,4 +1,4 @@
-package sawca.support.filter;
+package sawca.support.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
