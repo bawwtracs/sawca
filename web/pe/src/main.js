@@ -24,22 +24,25 @@ const messages = {
     "zh-CN": require('./common/lang/zh')
 }
 const i18n = new VueI18n({
-    // locale: 'en-US',
-    locale: 'zh-CN',
+    locale: 'en-US',
+    // locale: 'zh-CN',
     messages,
 })
 import { Locale } from 'vant';
-// import enUS from 'vant/lib/locale/lang/en-US';
-// Locale.use('en-US', enUS);
-import zhCN from 'vant/lib/locale/lang/zh-CN';
-Locale.use('zh-CN', zhCN);
+import enUS from 'vant/lib/locale/lang/en-US';
+Locale.use('en-US', enUS);
+// import zhCN from 'vant/lib/locale/lang/zh-CN';
+// Locale.use('zh-CN', zhCN);
 import locale from 'element-ui/lib/locale'
-// import lang from 'element-ui/lib/locale/lang/en'
-import lang from 'element-ui/lib/locale/lang/zh-CN'
+import lang from 'element-ui/lib/locale/lang/en'
+// import lang from 'element-ui/lib/locale/lang/zh-CN'
 locale.use(lang)
 
 // request
 import axios from "axios";
+axios.interceptors.response.use(res => {
+    return res.data;
+});
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
 

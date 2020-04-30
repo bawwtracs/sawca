@@ -49,15 +49,14 @@ export default {
       this.axios
         .post(this.api.login(), values)
         .then(response => {
-          let res = response.data;
-          if (res.succ) {
-            let account = res.data;
+          if (response.succ) {
+            let account = response.data;
             let ObjectId = require("../common/util/idHex");
             account._id = ObjectId.hexString(account._id);
             this.cache["account"] = JSON.stringify(account);
             this.$router.push("/index");
           } else {
-            this.$toast.fail(res.msg);
+            this.$toast.fail(response.msg);
           }
         })
         .catch(() => {});

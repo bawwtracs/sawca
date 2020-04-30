@@ -2,21 +2,29 @@ const portoal = "http";
 const host = "localhost";
 const port = "18080";
 
+const remote = `${portoal}://${host}:${port}`;
+
 const api = {
     advice() {
         return "https://api.adviceslip.com/advice";
     },
+    checkUsernameAvail(username) {
+        return `${remote}/api/acc/avail/username/${username}`
+    },
+    checkEmailAvail(email) {
+        return `${remote}/api/acc/avail/email/${email}`
+    },
     register() {
-        return `${portoal}://${host}:${port}/api/acc/register`;
+        return `${remote}/api/acc/register`;
     },
     login() {
-        return `${portoal}://${host}:${port}/api/acc/login`;
+        return `${remote}/api/acc/login`;
     },
     guest() {
-        return `${portoal}://${host}:${port}/api/acc/guest`;
+        return `${remote}/api/acc/guest`;
     },
     userinfo() {
-        return `${portoal}://${host}:${port}/api/acc/info`;
+        return `${remote}/api/acc/info`;
     }
 }
 export default api;

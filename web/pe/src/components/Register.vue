@@ -3,14 +3,8 @@
     <el-form class="form" :model="registerForm" status-icon :rules="rules" ref="registerForm">
       <img src="../assets/pe.png" />
       <div class="tips">{{ $t("message.registerTips") }}</div>
-      <el-form-item
-        prop="email"
-        :rules="[
-          { required: true, message: $t('message.emptyEmail'), trigger: 'change' },
-          { type: 'email', message: $t('message.emailError'), trigger:  'change' }
-        ]"
-      >
-        <el-input :placeholder="$t('message.email')" v-model="registerForm.email"></el-input>
+      <el-form-item prop="email">
+        <el-input type="email" :placeholder="$t('message.email')" v-model="registerForm.email"></el-input>
       </el-form-item>
       <el-form-item prop="username">
         <el-input type="text" :placeholder="$t('message.username')" v-model="registerForm.username"></el-input>
@@ -22,14 +16,6 @@
           v-model="registerForm.password"
           show-password
         />
-      </el-form-item>
-      <el-form-item prop="checkPass">
-        <el-input
-          type="password"
-          :placeholder="$t('message.checkPass')"
-          v-model="registerForm.checkPass"
-          show-password
-        ></el-input>
       </el-form-item>
       <van-button
         class="submit"
@@ -61,40 +47,101 @@ export default {
   name: "Register",
   data() {
     return {
+      interval: 1500,
+      currentEmail: "",
+      emailSet: {},
       registerForm: {
         email: "",
         username: "",
-        password: "",
-        checkPass: ""
+        password: ""
       },
       rules: {
-        password: [
+        email: [
+          {
+            required: true,
+            message: this.$t("message.emptyEmail"),
+            trigger: "blur"
+          },
+          {
+            type: "email",
+            message: this.$t("message.emailError"),
+            trigger: ["blur", "change"]
+          },
           {
             validator: (rule, value, callback) => {
-              if (value === "") {
-                callback(new Error(this.$t("message.emptyPassword")));
-              } else {
-                if (this.registerForm.checkPass !== "") {
-                  this.$refs.registerForm.validateField("checkPass");
+              this.currentEmail = value;
+              setTimeout(() => {
+                if (value == this.currentEmail) {
+                  if (this.emailSet[value] === "allow") {
+                    callback();
+                  } else if (this.emailSet[value] === "deny") {
+                    callback(
+                      new Error(this.$t("message.emailHasBeenRegistered"))
+                    );
+                  } else {
+                    this.axios
+                      .get(this.api.checkEmailAvail(value))
+                      .then(response => {
+                        if (response.succ) {
+                          if (!response.data) {
+                            this.emailSet[value] = "deny";
+                            callback(
+                              new Error(
+                                this.$t("message.emailHasBeenRegistered")
+                              )
+                            );
+                          }
+                          this.emailSet[value] = "allow";
+                          callback();
+                        } else {
+                          callback(
+                            new Error(this.$t("message.remoteUnkonwError"))
+                          );
+                        }
+                      })
+                      .catch(() => {
+                        callback(new Error(this.$t("message.errorNetwork")));
+                      });
+                  }
                 }
-                callback();
-              }
+              }, this.interval);
             },
-            trigger: "change"
+            trigger: ["blur", "change"]
           }
         ],
-        checkPass: [
+        username: [
+          {
+            required: true,
+            message: this.$t("message.emptyUsername"),
+            trigger: "blur"
+          },
           {
             validator: (rule, value, callback) => {
-              if (value === "") {
-                callback(new Error(this.$t("message.emptyCheckPass")));
-              } else if (value !== this.registerForm.password) {
-                callback(new Error(this.$t("message.checkPassError")));
-              } else {
+              if (/^[a-z0-9._-]{3,16}$/gim.test(value)) {
                 callback();
+              } else {
+                callback(new Error(this.$t("message.usernameError")));
               }
             },
-            trigger: "change"
+            trigger: ["blur", "change"]
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: this.$t("message.emptyPassword"),
+            trigger: "blur"
+          },
+          {
+            validator: (rule, value, callback) => {
+              let length = value.length;
+              if (length >= 8 && length <= 30) {
+                callback();
+              } else {
+                callback(new Error(this.$t("message.passwordError")));
+              }
+            },
+            trigger: ["blur", "change"]
           }
         ]
       }
@@ -104,8 +151,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // this.axios.post();
-          let data = this.registerForm.clone();
+          let data = this.registerForm;
           console.log(data);
         } else {
           return false;
@@ -151,5 +197,8 @@ export default {
       color: gray;
     }
   }
+}
+.el-form-item{
+  margin-bottom: 2.3rem;
 }
 </style>

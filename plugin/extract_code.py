@@ -62,14 +62,15 @@ def get_code(imagePath, k):
     ret, binary = cv2.threshold(
         mask, 0, 255, cv2.THRESH_BINARY_INV)
 
+    # cv2.imshow('mask',mask)
     # cv2.imwrite('tmp/binary.jpg', mask)
 
     noise_4(binary, k)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
-    textImage = Image.fromarray(src)
-    text = pytesseract.image_to_string(textImage, config='', lang='chi_sim')
+    textImage = Image.fromarray(mask)
+    text = pytesseract.image_to_string(textImage)
     print("Result:%s" % re.sub('\n', '', text))
 
 
