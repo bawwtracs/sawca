@@ -50,6 +50,8 @@ export default {
       interval: 1500,
       currentEmail: "",
       emailSet: {},
+      currentUsername: "",
+      usernameSet: {},
       registerForm: {
         email: "",
         username: "",
@@ -90,9 +92,10 @@ export default {
                                 this.$t("message.emailHasBeenRegistered")
                               )
                             );
+                          } else {
+                            this.emailSet[value] = "allow";
+                            callback();
                           }
-                          this.emailSet[value] = "allow";
-                          callback();
                         } else {
                           callback(
                             new Error(this.$t("message.remoteUnkonwError"))
@@ -117,11 +120,46 @@ export default {
           },
           {
             validator: (rule, value, callback) => {
-              if (/^[a-z0-9._-]{3,16}$/gim.test(value)) {
-                callback();
-              } else {
+              if (!/^[a-z0-9._-]{3,16}$/gim.test(value)) {
                 callback(new Error(this.$t("message.usernameError")));
               }
+              this.currentUsername = value;
+              setTimeout(() => {
+                if (value == this.currentUsername) {
+                  if (this.usernameSet[value] === "allow") {
+                    callback();
+                  } else if (this.usernameSet[value] === "deny") {
+                    callback(
+                      new Error(this.$t("message.usernameHasBeenRegistered"))
+                    );
+                  } else {
+                    this.axios
+                      .get(this.api.checkUsernameAvail(value))
+                      .then(response => {
+                        if (response.succ) {
+                          if (!response.data) {
+                            this.usernameSet[value] = "deny";
+                            callback(
+                              new Error(
+                                this.$t("message.usernameHasBeenRegistered")
+                              )
+                            );
+                          } else {
+                            this.usernameSet[value] = "allow";
+                            callback();
+                          }
+                        } else {
+                          callback(
+                            new Error(this.$t("message.remoteUnkonwError"))
+                          );
+                        }
+                      })
+                      .catch(() => {
+                        callback(new Error(this.$t("message.errorNetwork")));
+                      });
+                  }
+                }
+              }, this.interval);
             },
             trigger: ["blur", "change"]
           }
@@ -198,7 +236,7 @@ export default {
     }
   }
 }
-.el-form-item{
+.el-form-item {
   margin-bottom: 2.3rem;
 }
 </style>

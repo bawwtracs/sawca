@@ -15,7 +15,7 @@ export default {
       this.axios
         .get(this.api.userinfo())
         .then(response => {
-          let res = response.data;
+          let res = response;
           if (res.succ) {
             let account = res.data;
             let ObjectId = require("../common/util/idHex");

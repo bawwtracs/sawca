@@ -19,6 +19,7 @@ export const message = {
     emailHasBeenRegistered: '此邮箱已被注册',
     emptyUsername: '请输入用户名',
     usernameError: '用户名必须在3到16个字符之间，只允许字母，下划线，英文点号',
+    usernameHasBeenRegistered: '用户名已被注册',
     emptyPassword: '请输入密码',
     passwordError: '密码必须在8到30个字符之间',
     waitForEmailActiveAccount: '请到邮箱查收激活邮件并点击激活'
