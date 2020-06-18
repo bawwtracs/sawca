@@ -31,5 +31,10 @@ spring:
         format_sql: true
     show-sql: true
     open-in-view: on
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/**Mapper.xml

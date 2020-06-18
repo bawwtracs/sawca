@@ -73,7 +73,7 @@ export default {
             validator: (rule, value, callback) => {
               this.currentEmail = value;
               setTimeout(() => {
-                if (value == this.currentEmail) {
+                if (value && value == this.currentEmail) {
                   if (this.emailSet[value] === "allow") {
                     callback();
                   } else if (this.emailSet[value] === "deny") {
@@ -122,44 +122,45 @@ export default {
             validator: (rule, value, callback) => {
               if (!/^[a-z0-9._-]{3,16}$/gim.test(value)) {
                 callback(new Error(this.$t("message.usernameError")));
-              }
-              this.currentUsername = value;
-              setTimeout(() => {
-                if (value == this.currentUsername) {
-                  if (this.usernameSet[value] === "allow") {
-                    callback();
-                  } else if (this.usernameSet[value] === "deny") {
-                    callback(
-                      new Error(this.$t("message.usernameHasBeenRegistered"))
-                    );
-                  } else {
-                    this.axios
-                      .get(this.api.checkUsernameAvail(value))
-                      .then(response => {
-                        if (response.succ) {
-                          if (!response.data) {
-                            this.usernameSet[value] = "deny";
-                            callback(
-                              new Error(
-                                this.$t("message.usernameHasBeenRegistered")
-                              )
-                            );
+              } else {
+                this.currentUsername = value;
+                setTimeout(() => {
+                  if (value == this.currentUsername) {
+                    if (this.usernameSet[value] === "allow") {
+                      callback();
+                    } else if (this.usernameSet[value] === "deny") {
+                      callback(
+                        new Error(this.$t("message.usernameHasBeenRegistered"))
+                      );
+                    } else {
+                      this.axios
+                        .get(this.api.checkUsernameAvail(value))
+                        .then(response => {
+                          if (response.succ) {
+                            if (!response.data) {
+                              this.usernameSet[value] = "deny";
+                              callback(
+                                new Error(
+                                  this.$t("message.usernameHasBeenRegistered")
+                                )
+                              );
+                            } else {
+                              this.usernameSet[value] = "allow";
+                              callback();
+                            }
                           } else {
-                            this.usernameSet[value] = "allow";
-                            callback();
+                            callback(
+                              new Error(this.$t("message.remoteUnkonwError"))
+                            );
                           }
-                        } else {
-                          callback(
-                            new Error(this.$t("message.remoteUnkonwError"))
-                          );
-                        }
-                      })
-                      .catch(() => {
-                        callback(new Error(this.$t("message.errorNetwork")));
-                      });
+                        })
+                        .catch(() => {
+                          callback(new Error(this.$t("message.errorNetwork")));
+                        });
+                    }
                   }
-                }
-              }, this.interval);
+                }, this.interval);
+              }
             },
             trigger: ["blur", "change"]
           }
@@ -189,8 +190,25 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          let data = this.registerForm;
-          console.log(data);
+          let MD5 = require("md5.js");
+          let data = { ...this.registerForm };
+          data.password = new MD5().update(data.password).digest("hex");
+          this.axios
+            .post(this.api.register(), data)
+            .then(response => {
+              if (response.succ) {
+                let account = response.data;
+                let ObjectId = require("../common/util/idHex");
+                account._id = ObjectId.hexString(account._id);
+                this.cache["account"] = JSON.stringify(account);
+                this.$router.push("/index");
+              } else {
+                this.$toast.fail(response.msg);
+              }
+            })
+            .catch(() => {
+              this.$toast.fail(this.$t("message.errorNetwork"));
+            });
         } else {
           return false;
         }

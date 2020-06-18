@@ -1,6 +1,7 @@
 package sawca.support.account.rest;
 
 import com.alibaba.fastjson.JSONObject;
+import com.purgeteam.dispose.starter.Result;
 import com.purgeteam.dispose.starter.exception.category.BusinessException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -32,13 +33,9 @@ public class ACCRest {
     }
 
     @PostMapping("/register")
-    public JSONObject register(@RequestBody JSONObject jsonObject) {
+    public JSONObject register(@RequestBody JSONObject jsonObject, HttpSession session) {
         String email = jsonObject.getString("email");
         String username = jsonObject.getString("username");
-        String password = jsonObject.getString("password");
-        if (!checkPass(password)) {
-            throw new BusinessException("800", "Your password must be between 8 and 30 characters");
-        }
         Query query = new Query();
         query.addCriteria(new Criteria().and("username").is(username));
         JSONObject account = mongoTemplate.findOne(query, JSONObject.class, "account");
@@ -52,47 +49,47 @@ public class ACCRest {
             throw new BusinessException("802", "This email has been registered");
         }
         account = mongoTemplate.insert(jsonObject, "account");
+        session.setAttribute("account", account);
         accountFilter(account);
         return account;
     }
 
     @PostMapping("/login")
-    public JSONObject login(@RequestBody JSONObject jsonObject, HttpSession session) {
+    public Result<?> login(@RequestBody JSONObject jsonObject, HttpSession session) {
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
         if (StringUtils.isBlank(username)) {
             throw new BusinessException("803", "empty username");
         }
+        if (StringUtils.isBlank(password)) {
+            throw new BusinessException("803", "empty password");
+        }
         Query query = new Query();
         query.addCriteria(new Criteria().and("username").is(username));
         JSONObject account = mongoTemplate.findOne(query, JSONObject.class, "account");
         if (account == null) {
-            throw new BusinessException("804", "User not found");
+            return Result.ofFail("804", "User not found");
         } else if (!password.equals(account.getString("password"))) {
-            throw new BusinessException("804", "Password error");
+            return Result.ofFail("804", "Password error");
         } else {
             session.setAttribute("account", account);
             accountFilter(account);
-            return account;
+            return Result.ofSuccess(account);
         }
     }
 
     @GetMapping("/info")
-    public JSONObject getAccount(HttpSession session) throws BusinessException {
+    public Result<?> getAccount(HttpSession session) throws BusinessException {
         JSONObject account = (JSONObject) session.getAttribute("account");
         if (account == null) {
-            throw new BusinessException("805", "Need login");
+            return Result.ofFail("805", "Need login");
         }
         accountFilter(account);
-        return account;
+        return Result.ofSuccess(account);
     }
+
 
     private void accountFilter(JSONObject account) {
         account.remove("password");
-    }
-
-    private boolean checkPass(String password) {
-        int l = password.length();
-        return l >= 8 && l <= 30;
     }
 }
