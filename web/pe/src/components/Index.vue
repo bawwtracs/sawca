@@ -1,14 +1,28 @@
 <template>
-  <div>this is index.</div>
+  <div id="index">
+    <router-view />
+    <van-tabbar>
+      <van-tabbar-item to="/knowledge" icon="notes-o">{{ $t("message.knowledgeTab") }}</van-tabbar-item>
+      <van-tabbar-item to="/task" icon="cluster-o">{{ $t("message.taskTab") }}</van-tabbar-item>
+      <van-tabbar-item to="/statistics" icon="bar-chart-o">{{ $t("message.statisticsTab") }}</van-tabbar-item>
+      <van-tabbar-item to="/setting" icon="setting-o">{{ $t("message.settingTab") }}</van-tabbar-item>
+    </van-tabbar>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Index",
+  components: {},
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    onChange(index) {
+      // this.active = index;
+      console.log(index);
+    }
+  },
   beforeCreate() {
     let account = this.cache["account"];
     if (!account) {
@@ -41,4 +55,8 @@ export default {
 </script>
 
 <style lang="less">
+#index {
+  height: 100%;
+  width: 100%;
+}
 </style>

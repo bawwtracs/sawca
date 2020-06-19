@@ -22,5 +22,9 @@ export const message = {
     usernameHasBeenRegistered: 'Username has been registered',
     emptyPassword: 'Please enter password',
     passwordError: 'Password must be between 8 and 30 characters',
-    waitForEmailActiveAccount: 'Please check the activation mail'
+    waitForEmailActiveAccount: 'Please check the activation mail',
+    knowledgeTab: 'Knowledge',
+    taskTab: 'Task',
+    statisticsTab: 'Statistics',
+    settingTab: 'Setting',
 }

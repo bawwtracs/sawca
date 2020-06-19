@@ -66,7 +66,11 @@ export default {
     }
   },
   created() {
-    this.login = "login";
+    this.login = "hello";
+    setTimeout(()=>{
+      this.login = "login";
+    }, 1500)
+    // this.login = "login";
   }
 };
 </script>

@@ -49,16 +49,23 @@ Vue.use(VueAxios, axios);
 // vant
 import { Form } from 'vant';
 Vue.use(Form);
-import { CellGroup } from 'vant';
-Vue.use(CellGroup);
-import { Cell } from 'vant';
+import { Cell, CellGroup } from 'vant';
 Vue.use(Cell);
+Vue.use(CellGroup);
 import { Button } from 'vant';
 Vue.use(Button);
 import { Field } from 'vant';
 Vue.use(Field);
 import { Toast } from 'vant';
 Vue.use(Toast);
+import { Tabbar, TabbarItem } from 'vant';
+Vue.use(Tabbar);
+Vue.use(TabbarItem);
+import { Grid, GridItem } from 'vant';
+Vue.use(Grid);
+Vue.use(GridItem);
+import { Image as VanImage } from 'vant';
+Vue.use(VanImage);
 
 // element-ui
 import { Link } from 'element-ui';

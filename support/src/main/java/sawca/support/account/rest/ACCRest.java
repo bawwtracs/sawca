@@ -88,7 +88,6 @@ public class ACCRest {
         return Result.ofSuccess(account);
     }
 
-
     private void accountFilter(JSONObject account) {
         account.remove("password");
     }

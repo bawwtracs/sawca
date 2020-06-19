@@ -22,5 +22,9 @@ export const message = {
     usernameHasBeenRegistered: '用户名已被注册',
     emptyPassword: '请输入密码',
     passwordError: '密码必须在8到30个字符之间',
-    waitForEmailActiveAccount: '请到邮箱查收激活邮件并点击激活'
+    waitForEmailActiveAccount: '请到邮箱查收激活邮件并点击激活',
+    knowledgeTab: '知识',
+    taskTab: '任务',
+    statistisTab: '统计',
+    settingTab: '设置',
 }
