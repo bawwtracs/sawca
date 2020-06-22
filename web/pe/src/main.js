@@ -66,6 +66,12 @@ Vue.use(Grid);
 Vue.use(GridItem);
 import { Image as VanImage } from 'vant';
 Vue.use(VanImage);
+import { Icon } from 'vant';
+Vue.use(Icon);
+import { Switch } from 'vant';
+Vue.use(Switch);
+import { ActionSheet } from 'vant';
+Vue.use(ActionSheet);
 
 // element-ui
 import { Link } from 'element-ui';

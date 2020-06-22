@@ -32,10 +32,18 @@ export default new Router({
     {
         path: "/index",
         name: "index",
+        redirect: "setting",
         component: () =>
             import( /* webpackChunkName: "index" */ "./components/Index.vue"),
         props: true,
         children: [
+            {
+                path: "/todo",
+                name: "todo",
+                component: () =>
+                    import( /* webpackChunkName: "todo" */ "./components/Todo.vue"),
+                props: true,
+            },
             {
                 path: "/knowledge",
                 name: "knowledge",

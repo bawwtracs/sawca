@@ -11,13 +11,23 @@ export default {
   },
   methods: {},
   beforeCreate() {},
-  created() {
-    console.log(this.color);
-  }
+  created() {}
 };
 </script>
 
 <style lang="less">
+.knowledge-class {
+  margin-top: 5px;
+  font-size: 1.1rem;
+  text-align: left;
+  font-weight: bold;
+}
+.update-time {
+  font-size: 0.8rem;
+  text-align: left;
+  color: #bebebe;
+}
+
 .knowledge-icon {
   width: 100%;
   padding-bottom: 125%;
@@ -28,18 +38,18 @@ export default {
     position: absolute;
     right: 16%;
     width: 10px;
-    height: 103%;
-    transform: translateY(-1.5%);
+    height: 102.5%;
+    transform: translateY(-1.25%);
   }
 }
 
 .dark {
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 5px rgba(35, 45, 52, 0.1);
   &.knowledge-icon {
     background: linear-gradient(
-      to right bottom,
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.8)
+      to bottom,
+      rgba(35, 45, 52, 0.75),
+      rgba(35, 45, 52, 0.95)
     );
   }
   &.knowledge-icon::after {
@@ -48,30 +58,30 @@ export default {
 }
 
 .blue {
-  box-shadow: 5px 5px 5px rgba(0, 128, 128, 0.1);
+  box-shadow: 5px 5px 5px rgba(17, 104, 131, 0.1);
   &.knowledge-icon {
     background: linear-gradient(
-      to right bottom,
-      rgba(0, 128, 128, 0.7),
-      rgba(0, 128, 128, 0.8)
+      to bottom,
+      rgba(17, 104, 131, 0.75),
+      rgba(17, 104, 131, 0.95)
     );
   }
   &.knowledge-icon::after {
-    background: rgba(0, 128, 128, 0.9);
+    background: rgba(25, 73, 99, 0.9);
   }
 }
 
 .green {
-  box-shadow: 5px 5px 5px rgba(46, 139, 87, 0.1);
+  box-shadow: 5px 5px 5px rgba(23, 139, 105, 0.1);
   &.knowledge-icon {
     background: linear-gradient(
-      to right bottom,
-      rgba(46, 139, 87, 0.7),
-      rgba(46, 139, 87, 0.8)
+      to bottom,
+      rgba(23, 139, 105, 0.75),
+      rgba(23, 139, 105, 0.95)
     );
   }
   &.knowledge-icon::after {
-    background: rgba(46, 139, 87, 0.9);
+    background: rgba(18, 99, 76, 0.9);
   }
 }
 </style>

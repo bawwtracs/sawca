@@ -39,19 +39,15 @@ export default {
 <style lang="less">
 #knowledge {
   width: 100%;
-  height: 100%;
-  background-color: white;
+  margin-bottom: 50px;
 }
-
 .knowledge-class {
   margin-top: 5px;
   font-size: 1.1rem;
-  text-align: left;
   font-weight: bold;
 }
 .update-time {
   font-size: 0.8rem;
-  text-align: left;
   color: #bebebe;
 }
 </style>
