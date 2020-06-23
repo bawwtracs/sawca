@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 import router from "./router";
 
 Vue.config.productionTip = false
@@ -19,7 +19,6 @@ Vue.use(less);
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 const messages = {
-    // "ja-JP": require('./common/lang/jp'),
     "en-US": require('./common/lang/en'),
     "zh-CN": require('./common/lang/zh')
 }

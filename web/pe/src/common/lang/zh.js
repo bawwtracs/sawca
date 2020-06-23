@@ -2,7 +2,7 @@ export const message = {
     wel: '欢迎',
     advice: '这里能够找到灵感',
     remoteUnkonwError: '服务器开小差了，请稍后再试',
-    errorNetwork: '网络异常',
+    errorNetwork: '无法连接到服务端',
     login: '登录',
     email: '邮箱',
     username: '用户名',
@@ -25,6 +25,18 @@ export const message = {
     waitForEmailActiveAccount: '请到邮箱查收激活邮件并点击激活',
     knowledgeTab: '知识',
     taskTab: '任务',
-    statistisTab: '统计',
+    statisticsTab: '统计',
     settingTab: '设置',
+    setting: {
+        syncAutomatically: '自动同步',
+        language: '语言',
+        timeZone: '时区',
+        themeTitle: '主题',
+        theme: {
+            default: '默认',
+            dark: '夜间',
+            colorful: '多彩',
+        },
+        showNotification: '通知',
+    }
 }

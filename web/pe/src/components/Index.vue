@@ -1,11 +1,7 @@
 <template>
   <div id="index">
-    <div class="index-top">
-      <div class="wel">Good morning, Tom</div>
-      <div class="date">Tuesday, 23 June</div>
-    </div>
     <router-view />
-    <van-tabbar v-model="active" @change="onChange">
+    <van-tabbar v-model="active">
       <van-tabbar-item to="/knowledge" icon="notes-o">{{ $t("message.knowledgeTab") }}</van-tabbar-item>
       <van-tabbar-item to="/task" icon="cluster-o">{{ $t("message.taskTab") }}</van-tabbar-item>
       <van-tabbar-item to="/statistics" icon="bar-chart-o">{{ $t("message.statisticsTab") }}</van-tabbar-item>
@@ -23,11 +19,7 @@ export default {
       active: 0
     };
   },
-  methods: {
-    onChange(index) {
-      this.active = index;
-    }
-  },
+  methods: {},
   beforeCreate() {
     let account = this.cache["account"];
     if (!account) {
@@ -55,7 +47,23 @@ export default {
         });
     }
   },
-  created() {}
+  created() {
+    let routerName = this.$router.history.current.name;
+    switch (routerName) {
+      case "knowledge":
+        this.active = 0;
+        break;
+      case "task":
+        this.active = 1;
+        break;
+      case "statistics":
+        this.active = 2;
+        break;
+      case "setting":
+        this.active = 3;
+        break;
+    }
+  }
 };
 </script>
 
@@ -64,18 +72,5 @@ export default {
   height: 100%;
   width: 100%;
   background-color: white;
-}
-.index-top {
-  padding: 16px 0;
-  .wel {
-    padding: 0 24px;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  .date {
-    padding: 0 24px;
-    color: #bebebe;
-    margin: 8px 0;
-  }
 }
 </style>

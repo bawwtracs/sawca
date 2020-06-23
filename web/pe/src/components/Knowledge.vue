@@ -1,5 +1,9 @@
 <template>
   <div id="knowledge">
+    <div class="top">
+      <div class="wel">Good morning, Tom</div>
+      <div class="date">Tuesday, 23 June</div>
+    </div>
     <van-grid :gutter="16" :center="false" :border="false" :column-num="2">
       <van-grid-item>
         <knowledge-icon color="dark"></knowledge-icon>
@@ -40,6 +44,19 @@ export default {
 #knowledge {
   width: 100%;
   margin-bottom: 50px;
+  .top {
+    padding: 16px 0;
+    .wel {
+      padding: 0 24px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .date {
+      padding: 0 24px;
+      color: #bebebe;
+      margin: 8px 0;
+    }
+  }
 }
 .knowledge-class {
   margin-top: 5px;

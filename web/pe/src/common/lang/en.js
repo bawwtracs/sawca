@@ -2,7 +2,7 @@ export const message = {
     wel: 'Hello',
     advice: 'Find some inspiration from here',
     remoteUnkonwError: 'an unknow error occurred, please try it later',
-    errorNetwork: 'check your network',
+    errorNetwork: 'Can not connect to remote',
     login: 'Login',
     email: 'Email',
     username: 'Username',
@@ -27,4 +27,16 @@ export const message = {
     taskTab: 'Task',
     statisticsTab: 'Statistics',
     settingTab: 'Setting',
+    setting: {
+        syncAutomatically: 'Sync Automatically',
+        language: 'Language',
+        timeZone: 'Time Zone',
+        themeTitle: 'Theme',
+        theme: {
+            default: 'Default',
+            dark: 'Dark',
+            colorful: 'Colorful',
+        },
+        showNotification: 'Show Notification',
+    }
 }
