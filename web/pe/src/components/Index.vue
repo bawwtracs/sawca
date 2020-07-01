@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    <router-view />
+    <router-view @switchTheme="switchTheme" />
     <van-tabbar v-model="active">
       <van-tabbar-item to="/knowledge" icon="notes-o">{{ $t("message.knowledgeTab") }}</van-tabbar-item>
       <van-tabbar-item to="/task" icon="cluster-o">{{ $t("message.taskTab") }}</van-tabbar-item>
@@ -19,7 +19,11 @@ export default {
       active: 0
     };
   },
-  methods: {},
+  methods: {
+    switchTheme(name) {
+      this.$emit("switchTheme", name);
+    }
+  },
   beforeCreate() {
     let account = this.cache["account"];
     if (!account) {
@@ -71,6 +75,5 @@ export default {
 #index {
   height: 100%;
   width: 100%;
-  background-color: white;
 }
 </style>

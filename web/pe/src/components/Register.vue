@@ -1,12 +1,12 @@
 <template>
-  <div class="register">
+  <div id="register">
     <el-form class="form" :model="registerForm" status-icon :rules="rules" ref="registerForm">
       <img src="../assets/pe.png" />
       <div class="tips">{{ $t("message.registerTips") }}</div>
       <el-form-item prop="email">
         <el-input type="email" :placeholder="$t('message.email')" v-model="registerForm.email"></el-input>
       </el-form-item>
-      <el-form-item prop="username">
+      <el-form-item prop="username" class="username">
         <el-input type="text" :placeholder="$t('message.username')" v-model="registerForm.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -18,21 +18,21 @@
         />
       </el-form-item>
       <van-button
-        class="submit"
+        class="btn btn-primary"
         round
         block
         native-type="button"
         @click="submitForm('registerForm')"
       >{{ $t("message.register") }} ></van-button>
       <van-button
-        class="reset"
+        class="btn"
         round
         block
         native-type="button"
         @click="resetForm('registerForm')"
       >{{ $t("message.reset") }}</van-button>
       <van-button
-        class="cancel"
+        class="btn"
         round
         block
         native-type="button"
@@ -120,8 +120,10 @@ export default {
           },
           {
             validator: (rule, value, callback) => {
-              if (!/^[a-z0-9._-]{3,16}$/gim.test(value)) {
-                callback(new Error(this.$t("message.usernameError")));
+              if (value.length < 3 || value.length > 16) {
+                callback(new Error(this.$t("message.usernameLengthError")));
+              } else if (!/^[a-z0-9._-]/gim.test(value)) {
+                callback(new Error(this.$t("message.usernameCharError")));
               } else {
                 this.currentUsername = value;
                 setTimeout(() => {
@@ -225,7 +227,7 @@ export default {
 </script>
 
 <style lang="less">
-.register {
+#register {
   padding: 0 8pt;
   .tips {
     font-weight: bold;
@@ -239,22 +241,6 @@ export default {
     input {
       border-radius: 50px;
     }
-    .submit {
-      background-image: linear-gradient(to left, #6ab5d0, #34ecbb);
-      color: #fff;
-      font-weight: bold;
-    }
-    .reset,
-    .cancel {
-      margin: 7pt 0;
-    }
-    .cancel {
-      background: #f4f5f8;
-      color: gray;
-    }
   }
-}
-.el-form-item {
-  margin-bottom: 2.3rem;
 }
 </style>

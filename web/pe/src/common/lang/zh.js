@@ -18,7 +18,8 @@ export const message = {
     emailError: '请输入正确邮箱',
     emailHasBeenRegistered: '此邮箱已被注册',
     emptyUsername: '请输入用户名',
-    usernameError: '用户名必须在3到16个字符之间，只允许字母，下划线，英文点号',
+    usernameError: '用户名必须在3到16个字符之间',
+    usernameCharError: '只允许字母，数字，下划线，英文点号',
     usernameHasBeenRegistered: '用户名已被注册',
     emptyPassword: '请输入密码',
     passwordError: '密码必须在8到30个字符之间',
@@ -31,6 +32,7 @@ export const message = {
         syncAutomatically: '自动同步',
         language: '语言',
         timeZone: '时区',
+        vocationMood: '专业模式',
         themeTitle: '主题',
         theme: {
             default: '默认',

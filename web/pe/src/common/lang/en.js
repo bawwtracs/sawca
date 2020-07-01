@@ -18,7 +18,8 @@ export const message = {
     emailError: 'email is invalid',
     emailHasBeenRegistered: 'email has been registered',
     emptyUsername: 'Please enter username',
-    usernameError: 'Username must be between 3 and 16 characters, only contains letters, alphanumeric characters, underscore and dot',
+    usernameLengthError: 'Username must be between 3 and 16 characters',
+    usernameCharError: 'Only contains letters, alphanumeric characters, underscore and dot',
     usernameHasBeenRegistered: 'Username has been registered',
     emptyPassword: 'Please enter password',
     passwordError: 'Password must be between 8 and 30 characters',
@@ -31,6 +32,7 @@ export const message = {
         syncAutomatically: 'Sync Automatically',
         language: 'Language',
         timeZone: 'Time Zone',
+        vocationMood: 'Vocation Mood',
         themeTitle: 'Theme',
         theme: {
             default: 'Default',

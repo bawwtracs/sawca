@@ -1,5 +1,5 @@
 <template>
-  <div :class="login">
+  <div id="login" :class="login">
     <div class="wel">{{ $t("message.wel") }}</div>
     <van-form class="form" @submit="onLogin">
       <img class="logo" src="../assets/pe.png" alt />
@@ -20,8 +20,13 @@
           :placeholder="$t('message.password')"
         />
       </van-cell-group>
-      <van-button class="submit" round block native-type="submit">{{ $t("message.login") }} ></van-button>
-      <van-button class="visit" round block native-type="button">{{ $t("message.guest") }} ></van-button>
+      <van-button
+        class="btn btn-primary"
+        round
+        block
+        native-type="submit"
+      >{{ $t("message.login") }} ></van-button>
+      <van-button class="btn" round block native-type="button">{{ $t("message.guest") }} ></van-button>
     </van-form>
     <div class="link">
       <el-link @click="toRegister" type="primary">{{ $t("message.register") }}</el-link>
@@ -36,7 +41,7 @@ export default {
   name: "Login",
   data() {
     return {
-      login: "hello",
+      login: "login-loading",
       username: "",
       password: "",
       advice: ""
@@ -66,30 +71,32 @@ export default {
     }
   },
   created() {
-    this.login = "hello";
-    setTimeout(()=>{
+    this.login = "login-loading";
+    setTimeout(() => {
       this.login = "login";
-    }, 1500)
+    }, 1500);
     // this.login = "login";
   }
 };
 </script>
 
 <style lang="less">
-.hello {
+#login {
   height: 100%;
-  width: 100%;
-  background-image: linear-gradient(#6ab5d0, #34ecbb);
+}
+
+.login-loading {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+
   * {
     display: none;
   }
+
   .wel {
     display: block;
-    color: #fff;
     font-size: 36pt;
     font-family: "Comic Sans MS", cursive, sans-serif;
   }
@@ -123,17 +130,6 @@ export default {
     div {
       border-radius: 50px;
     }
-  }
-  .submit {
-    background-image: linear-gradient(to left, #6ab5d0, #34ecbb);
-    color: #fff;
-    font-weight: bold;
-  }
-  .visit {
-    margin: 7pt 0;
-    font-weight: bold;
-    background: #f4f5f8;
-    color: gray;
   }
   .link {
     margin-bottom: 10pt;

@@ -1,0 +1,77 @@
+@import './colorful.less';
+@import './dark.less';
+
+@btn-cancel : {
+    background: #f4f5f8;
+    color     : gray;
+}
+
+html,
+body {
+    height : 100%;
+    width  : 100%;
+    margin : 0;
+    padding: 0;
+
+    font-family            : Tahoma, Helvetica, Arial, "宋体", sans-serif;
+    -webkit-font-smoothing : antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.btn {
+    margin: 7pt 0;
+}
+
+.btn-primary {
+    font-weight: bold;
+}
+
+.theme(@name) {
+    @bg-global       :~'@{bg-global-@{name}}';
+    @bg-login-loading: ~'@{bg-login-loading-@{name}}';
+    @bg-login        :~'@{bg-login-@{name}}';
+
+    @font-default: ~'@{font-default-@{name}}';
+    @font-primary: ~'@{font-primary-@{name}}';
+    @font-cancel :~'@{font-cancel-@{name}}';
+
+    @btn-primary :~'@{btn-primary-@{name}}';
+    @btn-cancel  :~'@{btn-cancel-@{name}}';
+
+    body {
+        .@{name} {
+            background: @bg-global;
+            color     : @font-default;
+        }
+    }
+
+    .@{name} {
+
+        .btn-primary {
+            background: @btn-primary;
+            color     : @font-primary;
+        }
+
+        .btn-cancel {
+            background-image: @btn-cancel;
+            color           : @font-cancel;
+        }
+
+        .login-loading {
+            background-image: @bg-login-loading;
+
+            .wel {
+                color: @font-primary;
+            }
+        }
+
+        .login {
+            background: @bg-login;
+        }
+    }
+
+
+}
+
+.theme(dark);
+.theme(colorful);
