@@ -9,6 +9,10 @@ Vue.prototype.api = api;
 
 // request
 import axios from "axios";
+axios.interceptors.response.use(res => {
+    return res.data;
+});
+
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
 
