@@ -71,6 +71,8 @@ import { Switch } from 'vant';
 Vue.use(Switch);
 import { ActionSheet } from 'vant';
 Vue.use(ActionSheet);
+import { Uploader } from 'vant';
+Vue.use(Uploader);
 
 // element-ui
 import { Link } from 'element-ui';

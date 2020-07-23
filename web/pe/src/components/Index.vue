@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    <router-view @switchTheme="switchTheme" />
+    <router-view @switchTheme="switchTheme" @switchLang="switchLang" />
     <van-tabbar v-model="active">
       <van-tabbar-item to="/knowledge" icon="notes-o">{{ $t("message.knowledgeTab") }}</van-tabbar-item>
       <van-tabbar-item to="/task" icon="cluster-o">{{ $t("message.taskTab") }}</van-tabbar-item>
@@ -22,6 +22,9 @@ export default {
   methods: {
     switchTheme(name) {
       this.$emit("switchTheme", name);
+    },
+    switchLang(name) {
+      this.$emit("switchLang", name);
     }
   },
   beforeCreate() {

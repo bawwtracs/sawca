@@ -5,7 +5,9 @@
         <van-icon name="bars" size="24" />
       </template>
       <template #default>
-        <van-image class="head" src="https://www.test.jpg" />
+        <van-uploader>
+          <van-image class="head" :src="require('../assets/head.jpg')" />
+        </van-uploader>
       </template>
     </van-cell>
     <van-cell-group class="custom-group-title" title="General">
@@ -15,11 +17,11 @@
           <span>{{ $t("message.setting.syncAutomatically") }}</span>
         </template>
         <template #right-icon>
-          <van-switch v-model="syncAutomatically" size="24px" />
+          <van-switch v-model="setting.syncAutomatically" size="24px" />
         </template>
       </van-cell>
       <van-cell
-        :value="currentLang"
+        :value="setting.lang"
         center
         titleClass="custom-title"
         size="large"
@@ -38,7 +40,7 @@
         close-on-click-action
       />
       <van-cell
-        :value="currentTimeZone"
+        :value="setting.timeZone"
         center
         titleClass="custom-title"
         size="large"
@@ -56,17 +58,8 @@
         @select="selectTimeZone"
         close-on-click-action
       />
-      <van-cell center titleClass="custom-title" size="large">
-        <template #title>
-          <van-image class="custom-icon" :src="require('../assets/icon_32/101-analytics-1.png')" />
-          <span>{{ $t("message.setting.vocationMood") }}</span>
-        </template>
-        <template #right-icon>
-          <van-switch v-model="vocationMood" size="24px" />
-        </template>
-      </van-cell>
       <van-cell
-        :value="currentTheme"
+        :value="setting.theme"
         center
         titleClass="custom-title"
         size="large"
@@ -79,7 +72,7 @@
             class="custom-icon"
             :src="require('../assets/icon_32/076-infinity.png')"
           />
-          <span>{{ $t("message.setting.themeTitle") }}</span>
+          <span>{{ $t("message.setting.theme") }}</span>
         </template>
       </van-cell>
       <van-action-sheet
@@ -94,7 +87,15 @@
           <span>{{ $t("message.setting.showNotification") }}</span>
         </template>
         <template #right-icon>
-          <van-switch v-model="showNotification" size="24px" />
+          <van-switch v-model="setting.showNotification" size="24px" />
+        </template>
+      </van-cell>
+    </van-cell-group>
+    <van-cell-group class="custom-group-title" title="productivity">
+      <van-cell center titleClass="custom-title" size="large" is-link>
+        <template #title>
+          <van-image class="custom-icon" :src="require('../assets/icon_32/059-rat.png')" />
+          <span>{{ $t("message.setting.setGoal") }}</span>
         </template>
       </van-cell>
     </van-cell-group>
@@ -106,55 +107,39 @@ export default {
   name: "Setting",
   data() {
     return {
-      syncAutomatically: true,
-      vocationMood: true,
-      showNotification: true,
+      setting: null,
       showLangs: false,
       langs: [{ name: "en-US" }, { name: "zh-CN" }],
-      currentLang: "en-US",
       showThemes: false,
       themes: [
-        { name: this.$t("message.setting.theme.default") },
-        { name: this.$t("message.setting.theme.dark") },
-        { name: this.$t("message.setting.theme.colorful") }
+        { name: "Colorful" }
+        //  { name: "Dark" }
       ],
-      currentTheme: this.$t("message.setting.theme.default"),
-
       showTimeZones: false,
-      timeZones: [{ name: "UTC" }, { name: "GMT +8" }],
-      currentTimeZone: "UTC"
+      timeZones: [{ name: "UTC" }, { name: "GMT +8" }]
     };
   },
   methods: {
     selectLang(item) {
       this.showLangs = false;
-      this.currentLang = item.name;
-      this.$i18n.locale = this.currentLang;
-      let vant = require("vant");
-      let vnatLang = require(`vant/lib/locale/lang/${this.currentLang}`);
-      vant.Locale.use(this.currentLang, vnatLang);
-      let elementLocale = require("element-ui/lib/locale");
-      let elLang;
-      if (this.currentLang === "en-Us") {
-        elLang = require("element-ui/lib/locale/lang/en");
-      } else if (this.currentLang === "zh-CN") {
-        elLang = require("element-ui/lib/locale/lang/zh-CN");
-      }
-      elementLocale.use(elLang);
+      this.setting.lang = item.name;
+      this.$emit("switchLang", this.setting.lang);
     },
     selectTheme(item) {
       this.showThemes = false;
-      this.currentTheme = item.name;
-      this.$emit("switchTheme", this.currentTheme.toLowerCase());
+      this.setting.theme = item.name;
+      this.$emit("switchTheme", this.setting.theme);
     },
     selectTimeZone(item) {
       this.showTimeZones = false;
-      this.currentTimeZone = item.name;
+      this.setting.timeZone = item.name;
       //change Time Zone
     }
   },
   beforeCreate() {},
-  created() {}
+  created() {
+    this.setting = JSON.parse(this.cache["setting"]);
+  }
 };
 </script>
 

@@ -32,13 +32,8 @@ export const message = {
         syncAutomatically: '自动同步',
         language: '语言',
         timeZone: '时区',
-        vocationMood: '专业模式',
-        themeTitle: '主题',
-        theme: {
-            default: '默认',
-            dark: '夜间',
-            colorful: '多彩',
-        },
+        theme: '主题',
         showNotification: '通知',
+        setGoal: '目标'
     }
 }

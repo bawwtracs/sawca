@@ -29,7 +29,6 @@ body {
 .theme(@name) {
     @bg-global       :~'@{bg-global-@{name}}';
     @bg-login-loading: ~'@{bg-login-loading-@{name}}';
-    @bg-login        :~'@{bg-login-@{name}}';
 
     @font-default: ~'@{font-default-@{name}}';
     @font-primary: ~'@{font-primary-@{name}}';
@@ -53,8 +52,8 @@ body {
         }
 
         .btn-cancel {
-            background-image: @btn-cancel;
-            color           : @font-cancel;
+            background: @btn-cancel;
+            color     : @font-cancel;
         }
 
         .login-loading {
@@ -65,13 +64,21 @@ body {
             }
         }
 
-        .login {
-            background: @bg-login;
+        .van-cell {
+            background-color: @bg-global;
+        }
+
+        .van-switch--on {
+            background: @btn-primary;
+        }
+
+        .van-grid-item__content {
+            background-color: @bg-global;
         }
     }
 
 
 }
 
-.theme(dark);
 .theme(colorful);
+// .theme(dark);

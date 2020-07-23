@@ -32,7 +32,7 @@
         @click="resetForm('registerForm')"
       >{{ $t("message.reset") }}</van-button>
       <van-button
-        class="btn"
+        class="btn btn-cancel"
         round
         block
         native-type="button"

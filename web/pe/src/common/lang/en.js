@@ -32,13 +32,8 @@ export const message = {
         syncAutomatically: 'Sync Automatically',
         language: 'Language',
         timeZone: 'Time Zone',
-        vocationMood: 'Vocation Mood',
-        themeTitle: 'Theme',
-        theme: {
-            default: 'Default',
-            dark: 'Dark',
-            colorful: 'Colorful',
-        },
+        theme: 'Theme',
         showNotification: 'Show Notification',
+        setGoal: 'Set Goal'
     }
 }
