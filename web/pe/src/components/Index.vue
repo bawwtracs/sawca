@@ -1,6 +1,10 @@
 <template>
   <div id="index">
-    <router-view @switchTheme="switchTheme" @switchLang="switchLang" />
+    <router-view
+      @switchTheme="switchTheme"
+      @switchLang="switchLang"
+      @switchTimeZone="switchTimeZone"
+    />
     <van-tabbar v-model="active">
       <van-tabbar-item to="/knowledge" icon="notes-o">{{ $t("message.knowledgeTab") }}</van-tabbar-item>
       <van-tabbar-item to="/task" icon="cluster-o">{{ $t("message.taskTab") }}</van-tabbar-item>
@@ -16,7 +20,7 @@ export default {
   components: {},
   data() {
     return {
-      active: 0
+      active: 0,
     };
   },
   methods: {
@@ -25,31 +29,29 @@ export default {
     },
     switchLang(name) {
       this.$emit("switchLang", name);
-    }
+    },
+    switchTimeZone(name) {
+      this.$emit("switchTimeZone", name);
+    },
   },
   beforeCreate() {
-    let account = this.cache["account"];
+    let account = this.cache.get("account");
     if (!account) {
       this.axios
         .get(this.api.userinfo())
-        .then(response => {
+        .then((response) => {
           let res = response;
-          if (res.succ) {
-            let account = res.data;
-            let ObjectId = require("../common/util/idHex");
-            account._id = ObjectId.hexString(account._id);
-            this.cache["account"] = JSON.stringify(account);
-          } else {
+          if (!res.succ) {
             this.$toast({
               type: "fail",
               message: res.msg,
               onOpened: () => {
                 this.$router.push("/login");
-              }
+              },
             });
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     }
@@ -70,7 +72,7 @@ export default {
         this.active = 3;
         break;
     }
-  }
+  },
 };
 </script>
 

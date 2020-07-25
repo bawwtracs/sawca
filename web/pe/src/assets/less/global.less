@@ -37,14 +37,9 @@ body {
     @btn-primary :~'@{btn-primary-@{name}}';
     @btn-cancel  :~'@{btn-cancel-@{name}}';
 
-    body {
-        .@{name} {
-            background: @bg-global;
-            color     : @font-default;
-        }
-    }
-
     .@{name} {
+        background: @bg-global;
+        color     : @font-default;
 
         .btn-primary {
             background: @btn-primary;
@@ -64,7 +59,7 @@ body {
             }
         }
 
-        .van-cell {
+        #setting .van-cell {
             background-color: @bg-global;
         }
 
@@ -81,4 +76,3 @@ body {
 }
 
 .theme(colorful);
-// .theme(dark);

@@ -38,10 +38,10 @@ export default new Router({
         props: true,
         children: [
             {
-                path: "/todo",
-                name: "todo",
+                path: "/todoList",
+                name: "todoList",
                 component: () =>
-                    import( /* webpackChunkName: "todo" */ "./components/Todo.vue"),
+                    import( /* webpackChunkName: "todoList" */ "./components/TodoList.vue"),
                 props: true,
             },
             {

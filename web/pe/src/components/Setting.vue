@@ -5,8 +5,8 @@
         <van-icon name="bars" size="24" />
       </template>
       <template #default>
-        <van-uploader>
-          <van-image class="head" :src="require('../assets/head.jpg')" />
+        <van-uploader :after-read="afterRead" :max-size="1024 * 1024 * 2" @oversize="onOversize">
+          <van-image class="head" :src="head" />
         </van-uploader>
       </template>
     </van-cell>
@@ -107,16 +107,20 @@ export default {
   name: "Setting",
   data() {
     return {
+      head: "",
       setting: null,
       showLangs: false,
       langs: [{ name: "en-US" }, { name: "zh-CN" }],
       showThemes: false,
       themes: [
-        { name: "Colorful" }
+        { name: "Colorful" },
         //  { name: "Dark" }
       ],
       showTimeZones: false,
-      timeZones: [{ name: "UTC" }, { name: "GMT +8" }]
+      timeZones: [
+        { name: "UTC" },
+        //  { name: "GMT +8" }
+      ],
     };
   },
   methods: {
@@ -134,12 +138,36 @@ export default {
       this.showTimeZones = false;
       this.setting.timeZone = item.name;
       //change Time Zone
-    }
+    },
+    afterRead(file) {
+      let account = this.cache.get("account");
+      this.head = file.content;
+      account.head = file.content;
+      this.cache.put("account", account);
+      this.axios
+        .put(this.api.userHead(account._id), {
+          head: file.content,
+        })
+        .then((response) => {
+          let res = response;
+          if (!res.succ) {
+            this.$toast({
+              type: "fail",
+              message: res.msg,
+            });
+          }
+        });
+    },
+    onOversize(file) {
+      console.log(file);
+      this.$toast("allow 2mb to save image");
+    },
   },
   beforeCreate() {},
   created() {
-    this.setting = JSON.parse(this.cache["setting"]);
-  }
+    this.setting = this.cache.get("setting");
+    this.head = this.cache.get("account")["head"] || "";
+  },
 };
 </script>
 

@@ -5,8 +5,8 @@ const port = "18080";
 const remote = `${portoal}://${host}:${port}`;
 
 const api = {
-    advice() {
-        return "https://api.adviceslip.com/advice";
+    sys() {
+        return `${remote}/sys.json`;
     },
     checkUsernameAvail(username) {
         return `${remote}/api/acc/avail/username/${username}`
@@ -25,6 +25,18 @@ const api = {
     },
     userinfo() {
         return `${remote}/api/acc/info`;
+    },
+    userHead(id) {
+        return `${remote}/api/acc/${id}/head`;
+    },
+    todoList(accid) {
+        return `${remote}/api/todo/list/acc/${accid}`
+    },
+    createTodo() {
+        return `${remote}/api/todo/create`;
+    },
+    removeTodo(id){
+        return `${remote}/api/todo/${id}`;
     }
 }
 export default api;

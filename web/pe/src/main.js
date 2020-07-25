@@ -5,7 +5,7 @@ import router from "./router";
 Vue.config.productionTip = false
 
 // localStorage
-Vue.prototype.cache = window.localStorage;
+Vue.prototype.cache = require("./common/util/localStorage").default;
 
 // api
 import api from "./common/rest/api";
@@ -27,15 +27,6 @@ const i18n = new VueI18n({
     // locale: 'zh-CN',
     messages,
 })
-import { Locale } from 'vant';
-import enUS from 'vant/lib/locale/lang/en-US';
-Locale.use('en-US', enUS);
-// import zhCN from 'vant/lib/locale/lang/zh-CN';
-// Locale.use('zh-CN', zhCN);
-import locale from 'element-ui/lib/locale'
-import lang from 'element-ui/lib/locale/lang/en'
-// import lang from 'element-ui/lib/locale/lang/zh-CN'
-locale.use(lang)
 
 // request
 import axios from "axios";
@@ -73,6 +64,18 @@ import { ActionSheet } from 'vant';
 Vue.use(ActionSheet);
 import { Uploader } from 'vant';
 Vue.use(Uploader);
+import { NavBar } from 'vant';
+Vue.use(NavBar)
+import { Divider } from 'vant';
+Vue.use(Divider);
+import { SwipeCell } from 'vant';
+Vue.use(SwipeCell);
+import { Popup } from 'vant';
+Vue.use(Popup);
+import { CountDown } from 'vant';
+Vue.use(CountDown);
+import { DatetimePicker } from 'vant';
+Vue.use(DatetimePicker);
 
 // element-ui
 import { Link } from 'element-ui';
@@ -83,6 +86,10 @@ import { FormItem } from 'element-ui';
 Vue.use(FormItem);
 import { Input } from 'element-ui';
 Vue.use(Input);
+
+// cropper
+import VueCropper from 'vue-cropper'
+Vue.use(VueCropper)
 
 new Vue({
     router,

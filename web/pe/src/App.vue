@@ -1,10 +1,15 @@
 <template>
   <div id="app" :class="theme">
-    <router-view @switchTheme="switchTheme" @switchLang="switchLang" />
+    <router-view
+      @switchTheme="switchTheme"
+      @switchLang="switchLang"
+      @switchTimeZone="switchTimeZone"
+    />
   </div>
 </template>
 
 <script>
+import "./assets/less/global.less";
 export default {
   name: "App",
   data() {
@@ -13,33 +18,36 @@ export default {
     };
   },
   methods: {
-    initSetting() {
-      let setting = this.getSetting();
-      this.switchLang(setting.lang);
-      this.switchTheme(setting.theme);
+    initOperate() {
+      let opearte = this.cache.get("operate");
+      if (!opearte) {
+        opearte = {
+          vocabulary: {},
+          todoList: {},
+        };
+        this.cache.put("operate", opearte);
+      }
     },
-    getSetting() {
-      let setting = this.cache["setting"];
+    initSetting() {
+      let setting = this.cache.get("setting");
       if (!setting) {
-        setting = JSON.stringify({
+        setting = {
           lang: "en-US",
           timeZone: "UTC",
           theme: "colorful",
           showNotification: true,
           syncAutomatically: true,
-        });
-        this.cache["setting"] = setting;
+        };
+        this.cache.put("setting", setting);
       }
-      return JSON.parse(setting);
-    },
-    saveSetting(options) {
-      let setting = this.getSetting();
-      Object.assign(setting, options);
-      this.cache["setting"] = JSON.stringify(setting);
+      this.switchLang(setting.lang);
+      this.switchTheme(setting.theme);
     },
     switchTheme(name) {
       this.theme = name.toLowerCase();
-      this.saveSetting({ theme: name });
+      let setting = this.cache.get("setting");
+      setting.theme = name;
+      this.cache.put("setting", setting);
     },
     switchLang(name) {
       this.$i18n.locale = name;
@@ -54,7 +62,9 @@ export default {
         elLang = require("element-ui/lib/locale/lang/zh-CN");
       }
       elementLocale.use(elLang.default);
-      this.saveSetting({ lang: name });
+      let setting = this.cache.get("setting");
+      setting.lang = name;
+      this.cache.put("setting", setting);
     },
     switchTimeZone(name) {
       console.log(name);
@@ -62,6 +72,7 @@ export default {
   },
   beforeCreate() {},
   created() {
+    this.initOperate();
     this.initSetting();
   },
 };

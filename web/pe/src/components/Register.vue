@@ -199,10 +199,6 @@ export default {
             .post(this.api.register(), data)
             .then(response => {
               if (response.succ) {
-                let account = response.data;
-                let ObjectId = require("../common/util/idHex");
-                account._id = ObjectId.hexString(account._id);
-                this.cache["account"] = JSON.stringify(account);
                 this.$router.push("/index");
               } else {
                 this.$toast.fail(response.msg);
