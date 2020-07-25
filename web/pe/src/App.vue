@@ -9,7 +9,7 @@ export default {
   name: "App",
   data() {
     return {
-      theme: ""
+      theme: "",
     };
   },
   methods: {
@@ -26,26 +26,26 @@ export default {
           timeZone: "UTC",
           theme: "colorful",
           showNotification: true,
-          syncAutomatically: true
+          syncAutomatically: true,
         });
         this.cache["setting"] = setting;
       }
       return JSON.parse(setting);
     },
-    saveSetting(key, value) {
+    saveSetting(options) {
       let setting = this.getSetting();
-      setting[key] = value;
+      Object.assign(setting, options);
       this.cache["setting"] = JSON.stringify(setting);
     },
     switchTheme(name) {
       this.theme = name.toLowerCase();
-      this.saveSetting( "theme", name );
+      this.saveSetting({ theme: name });
     },
     switchLang(name) {
       this.$i18n.locale = name;
       let vant = require("vant");
       let vnatLang = require(`vant/lib/locale/lang/${name}`);
-      vant.Locale.use(name, vnatLang);
+      vant.Locale.use(name, vnatLang.default);
       let elementLocale = require("element-ui/lib/locale");
       let elLang;
       if (name === "en-US") {
@@ -53,17 +53,17 @@ export default {
       } else if (name === "zh-CN") {
         elLang = require("element-ui/lib/locale/lang/zh-CN");
       }
-      elementLocale.use(elLang);
-      this.saveSetting( "lang", name );
+      elementLocale.use(elLang.default);
+      this.saveSetting({ lang: name });
     },
     switchTimeZone(name) {
       console.log(name);
-    }
+    },
   },
   beforeCreate() {},
   created() {
     this.initSetting();
-  }
+  },
 };
 </script>
 
