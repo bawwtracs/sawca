@@ -127,7 +127,9 @@ export default {
     initTodoList() {
       this.axios.get(this.api.todoList(this.accid)).then((res) => {
         if (res.succ) {
-          this.todoItems = res.data;
+          this.todoItems = this._.sortBy(res.data, (obj) => {
+            return obj.time;
+          });
         }
       });
     },

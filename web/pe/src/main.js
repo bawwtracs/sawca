@@ -7,6 +7,9 @@ Vue.config.productionTip = false
 // localStorage
 Vue.prototype.cache = require("./common/util/localStorage").default;
 
+// lodash
+Vue.prototype._ = require("lodash");
+
 // api
 import api from "./common/rest/api";
 Vue.prototype.api = api;
