@@ -37,9 +37,12 @@ body {
     @btn-primary :~'@{btn-primary-@{name}}';
     @btn-cancel  :~'@{btn-cancel-@{name}}';
 
-    .@{name} {
+    body {
         background: @bg-global;
         color     : @font-default;
+    }
+
+    .@{name} {
 
         .btn-primary {
             background: @btn-primary;

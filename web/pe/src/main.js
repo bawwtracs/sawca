@@ -69,10 +69,14 @@ import { Uploader } from 'vant';
 Vue.use(Uploader);
 import { NavBar } from 'vant';
 Vue.use(NavBar)
+import { Tab, Tabs } from "vant";
+Vue.use(Tab).use(Tabs);
 import { Divider } from 'vant';
 Vue.use(Divider);
 import { SwipeCell } from 'vant';
 Vue.use(SwipeCell);
+import { IndexBar, IndexAnchor } from "vant";
+Vue.use(IndexBar).use(IndexAnchor);
 import { Popup } from 'vant';
 Vue.use(Popup);
 import { CountDown } from 'vant';

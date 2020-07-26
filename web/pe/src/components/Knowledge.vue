@@ -4,13 +4,14 @@
       <div class="wel">{{wel}}</div>
       <div class="date">{{date}}</div>
     </div>
+    <van-divider />
     <van-grid :gutter="16" :center="false" :border="false" :column-num="2">
       <van-grid-item to="/todoList" @click="updateLastClick('todoList')">
         <knowledge-icon color="blue"></knowledge-icon>
         <div class="knowledge-class">ToDoList</div>
         <div class="last-time">Last at {{toDoListTime}}</div>
       </van-grid-item>
-      <van-grid-item :url="vocabulary" @click="updateLastClick('vocabulary')">
+      <van-grid-item to="/origin" @click="updateLastClick('vocabulary')">
         <knowledge-icon color="green"></knowledge-icon>
         <div class="knowledge-class">Vocabulary</div>
         <div class="last-time">Last at {{vocabularyTime}}</div>
@@ -57,7 +58,7 @@ export default {
       this.vocabulary = response.vocabulary;
     });
     let account = this.cache.get("account");
-    this.wel = `How are you, ${account.username}`;
+    this.wel = `Hello, ${account.username}`;
     let operate = this.cache.get("operate");
     if (operate.todoList && operate.todoList.lastTime) {
       this.toDoListTime = operate.todoList.lastTime;

@@ -9,19 +9,6 @@ export default new Router({
       path: "/",
       redirect: "origin"
     },
-    {
-      path: "/origin",
-      name: "origin",
-      component: () =>
-        import(/* webpackChunkName: "origin" */ "./components/Origin.vue"),
-      props: true
-    },
-    {
-      path: "/word/originId/:originId",
-      name: "word",
-      component: () =>
-        import(/* webpackChunkName: "word" */ "./components/Word.vue"),
-      props: true
-    }
+    
   ]
 });

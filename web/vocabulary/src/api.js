@@ -3,22 +3,22 @@ let host = "localhost";
 let port = "18080";
 
 let api = {
-    origins: () => {
-        return `${portoal}://${host}:${port}/api/vocabulary/origins`;
-    },
-    origin: originId => {
-        return `${portoal}://${host}:${port}/api/vocabulary/origin${
+  origins: () => {
+    return `${portoal}://${host}:${port}/api/vocabulary/origins`;
+  },
+  origin: originId => {
+    return `${portoal}://${host}:${port}/api/vocabulary/origin${
       originId ? "/" + originId : ""
-    }`;
-    },
-    words: () => {
-        return `${portoal}://${host}:${port}/api/vocabulary/words`;
-    },
-    word: wordId => {
-        return `${portoal}://${host}:${port}/api/vocabulary/word${
+      }`;
+  },
+  words: () => {
+    return `${portoal}://${host}:${port}/api/vocabulary/words`;
+  },
+  word: wordId => {
+    return `${portoal}://${host}:${port}/api/vocabulary/word${
       wordId ? "/" + wordId : ""
-    }`;
-    }
+      }`;
+  }
 };
 
 export default api;

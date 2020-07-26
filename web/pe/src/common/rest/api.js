@@ -35,8 +35,24 @@ const api = {
     createTodo() {
         return `${remote}/api/todo/create`;
     },
-    removeTodo(id){
+    removeTodo(id) {
         return `${remote}/api/todo/${id}`;
+    },
+    origins: () => {
+        return `${remote}/api/vocabulary/origins`;
+    },
+    origin: originId => {
+        return `${remote}/api/vocabulary/origin${
+            originId ? "/" + originId : ""
+            }`;
+    },
+    words: () => {
+        return `${remote}/api/vocabulary/words`;
+    },
+    word: wordId => {
+        return `${remote}/api/vocabulary/word${
+            wordId ? "/" + wordId : ""
+            }`;
     }
 }
 export default api;

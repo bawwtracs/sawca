@@ -77,8 +77,4 @@ export default {
 </script>
 
 <style lang="less">
-#index {
-  height: 100%;
-  width: 100%;
-}
 </style>
