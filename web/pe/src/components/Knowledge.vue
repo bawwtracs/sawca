@@ -31,7 +31,6 @@ export default {
     return {
       wel: "",
       date: "",
-      vocabulary: null,
       toDoListTime: "",
       vocabularyTime: "",
     };
@@ -54,9 +53,6 @@ export default {
   },
   beforeCreate() {},
   created() {
-    this.axios.get(this.api.sys()).then((response) => {
-      this.vocabulary = response.vocabulary;
-    });
     let account = this.cache.get("account");
     this.wel = `Hello, ${account.username}`;
     let operate = this.cache.get("operate");

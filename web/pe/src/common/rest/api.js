@@ -5,9 +5,6 @@ const port = "18080";
 const remote = `${portoal}://${host}:${port}`;
 
 const api = {
-    sys() {
-        return `${remote}/sys.json`;
-    },
     checkUsernameAvail(username) {
         return `${remote}/api/acc/avail/username/${username}`
     },
