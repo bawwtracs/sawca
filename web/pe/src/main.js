@@ -94,9 +94,10 @@ Vue.use(FormItem);
 import { Input } from 'element-ui';
 Vue.use(Input);
 
-// cropper
-import VueCropper from 'vue-cropper'
-Vue.use(VueCropper)
+// echarts
+import ECharts from 'vue-echarts'
+import 'echarts-gl'
+Vue.component('v-chart', ECharts)
 
 new Vue({
     router,
