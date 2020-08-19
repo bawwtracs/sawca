@@ -4,8 +4,7 @@
       <div class="wel">{{wel}}</div>
       <div class="date">{{date}}</div>
     </div>
-    <van-divider />
-    <van-grid :gutter="16" :center="false" :border="false" :column-num="2">
+    <van-grid :gutter="26" :center="false" :border="false" :column-num="2">
       <van-grid-item to="/todoList" @click="updateLastClick('todoList')">
         <knowledge-icon color="blue"></knowledge-icon>
         <div class="knowledge-class">ToDoList</div>
@@ -15,6 +14,16 @@
         <knowledge-icon color="green"></knowledge-icon>
         <div class="knowledge-class">Vocabulary</div>
         <div class="last-time">Last at {{vocabularyTime}}</div>
+      </van-grid-item>
+      <van-grid-item to="/brainStorm" @click="updateLastClick('brainStorm')">
+        <knowledge-icon color="dark"></knowledge-icon>
+        <div class="knowledge-class">BrainStorm</div>
+        <div class="last-time">Last at {{brainStormTime}}</div>
+      </van-grid-item>
+      <van-grid-item to="/note" @click="updateLastClick('note')">
+        <knowledge-icon color="purple"></knowledge-icon>
+        <div class="knowledge-class">Note</div>
+        <div class="last-time">Last at {{noteTime}}</div>
       </van-grid-item>
     </van-grid>
   </div>
@@ -33,6 +42,8 @@ export default {
       date: "",
       toDoListTime: "",
       vocabularyTime: "",
+      brainStormTime: "",
+      noteTime: "",
     };
   },
   methods: {
@@ -48,6 +59,11 @@ export default {
         case "todoList":
           this.toDoListTime = now;
           break;
+        case "brainStorm":
+          this.brainStormTime = now;
+          break;
+        case "note":
+          this.noteTime = now;
       }
     },
   },
@@ -61,6 +77,12 @@ export default {
     }
     if (operate.vocabulary && operate.vocabulary.lastTime) {
       this.vocabularyTime = operate.vocabulary.lastTime;
+    }
+    if (operate.brainStorm && operate.brainStorm.lastTime) {
+      this.brainStormTime = operate.brainStorm.lastTime;
+    }
+    if (operate.note && operate.note.lastTime) {
+      this.noteTime = operate.note.lastTime;
     }
     this.date = new Date().toLocaleDateString();
   },

@@ -38,6 +38,20 @@ export default new Router({
         props: true,
         children: [
             {
+                path: "/brainStorm",
+                name: "brainStorm",
+                component: () =>
+                    import( /* webpackChunkName: "brainStorm" */ "./components/BrainStorm.vue"),
+                props: true,
+            },
+            {
+                path: "/note",
+                name: "note",
+                component: () =>
+                    import( /* webpackChunkName: "note" */ "./components/Note.vue"),
+                props: true,
+            },
+            {
                 path: "/todoList",
                 name: "todoList",
                 component: () =>

@@ -44,7 +44,7 @@ export default {
       login: "login-loading",
       username: "",
       password: "",
-      advice: ""
+      advice: "",
     };
   },
   methods: {
@@ -53,12 +53,12 @@ export default {
       values.password = new MD5().update(values.password).digest("hex");
       this.axios
         .post(this.api.login(), values)
-        .then(response => {
+        .then((response) => {
           if (response.succ) {
             let account = response.data;
             let ObjectId = require("../common/util/idHex");
             account._id = ObjectId.hexString(account._id);
-            this.cache["account"] = JSON.stringify(account);
+            this.cache.put("account", account);
             this.$router.push("/index");
           } else {
             this.$toast.fail(response.msg);
@@ -68,7 +68,7 @@ export default {
     },
     toRegister() {
       this.$router.push("/register");
-    }
+    },
   },
   created() {
     this.login = "login-loading";
@@ -76,7 +76,7 @@ export default {
       this.login = "login";
     }, 1500);
     // this.login = "login";
-  }
+  },
 };
 </script>
 
@@ -86,6 +86,9 @@ export default {
 }
 
 .login-loading {
+  &#login {
+    height: 100vh;
+  }
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

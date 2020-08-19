@@ -11,7 +11,7 @@ export default {
   },
   methods: {},
   beforeCreate() {},
-  created() {}
+  created() {},
 };
 </script>
 
@@ -82,6 +82,20 @@ export default {
   }
   &.knowledge-icon::after {
     background: rgba(18, 99, 76, 0.9);
+  }
+}
+
+.purple {
+  box-shadow: 5px 5px 5px rgba(67, 109, 108, 0.1);
+  &.knowledge-icon {
+    background: linear-gradient(
+      to bottom,
+      rgba(67, 109, 108, 0.75),
+      rgba(67, 109, 108, 0.95)
+    );
+  }
+  &.knowledge-icon::after {
+    background: rgba(67, 109, 108, 0.9);
   }
 }
 </style>

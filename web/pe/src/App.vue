@@ -24,6 +24,8 @@ export default {
         opearte = {
           vocabulary: {},
           todoList: {},
+          brainStorm: {},
+          note: {},
         };
         this.cache.put("operate", opearte);
       }
