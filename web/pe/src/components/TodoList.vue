@@ -117,15 +117,15 @@ export default {
     del(todo) {
       let ObjectId = require("../common/util/idHex");
       this.axios
-        .delete(this.api.removeTodo(ObjectId.hexString(todo._id)))
+        .delete(this.api.todo(ObjectId.hexString(todo._id)))
         .then((res) => {
           if (res.succ) {
-            this.initTodoList();
+            this.initTodos();
           }
         });
     },
-    initTodoList() {
-      this.axios.get(this.api.todoList(this.accid)).then((res) => {
+    initTodos() {
+      this.axios.get(this.api.todos(this.accid)).then((res) => {
         if (res.succ) {
           this.todoItems = this._.sortBy(res.data, (obj) => {
             return obj.time;
@@ -134,16 +134,16 @@ export default {
       });
     },
     submit(value) {
-      this.submiting = false;
       this.submiting = true;
       let todoItem = this.todoItem;
       todoItem.time = value;
       todoItem.accid = this.accid;
-      this.axios.post(this.api.createTodo(), todoItem).then((res) => {
+      this.axios.post(this.api.todo(), todoItem).then((res) => {
         if (res.succ) {
           this.$toast("saved");
-          this.initTodoList();
+          this.initTodos();
         }
+        this.submiting = false;
         this.showEditor = false;
       });
     },
@@ -151,7 +151,7 @@ export default {
   beforeCreate() {},
   created() {
     this.accid = this.cache.get("account")._id;
-    this.initTodoList();
+    this.initTodos();
   },
 };
 </script>

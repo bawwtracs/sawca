@@ -26,14 +26,21 @@ const api = {
     userHead(id) {
         return `${remote}/api/acc/${id}/head`;
     },
-    todoList(accid) {
+    notes(accid) {
+        return `${remote}/api/note/list/acc/${accid}`
+    },
+    note: noteId => {
+        return `${remote}/api/note${
+            noteId ? "/" + noteId : ""
+            }`;
+    },
+    todos(accid) {
         return `${remote}/api/todo/list/acc/${accid}`
     },
-    createTodo() {
-        return `${remote}/api/todo/create`;
-    },
-    removeTodo(id) {
-        return `${remote}/api/todo/${id}`;
+    todo: todoId => {
+        return `${remote}/api/todo${
+            todoId ? "/" + todoId : ""
+            }`;
     },
     origins: () => {
         return `${remote}/api/vocabulary/origins`;
