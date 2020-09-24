@@ -81,6 +81,8 @@ import { Popup } from 'vant';
 Vue.use(Popup);
 import { CountDown } from 'vant';
 Vue.use(CountDown);
+import { Picker } from 'vant';
+Vue.use(Picker);
 import { DatetimePicker } from 'vant';
 Vue.use(DatetimePicker);
 

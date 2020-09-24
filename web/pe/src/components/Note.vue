@@ -96,7 +96,7 @@ export default {
       this.axios.get(this.api.notes(this.accid)).then((res) => {
         if (res.succ) {
           this.notes = this._.sortBy(res.data, (obj) => {
-            return obj._id;
+            return obj._id.time;
           });
           console.log(this.notes);
         }
